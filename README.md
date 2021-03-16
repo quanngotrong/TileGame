@@ -2,6 +2,7 @@
 Tile Game 
 
 Nếu chưa tải Java 15 hay JavaFX thì tải về nhé
+
 +) JDK 15: https://www.oracle.com/java/technologies/javase-jdk15-downloads.html
 +) JavaFX SDK: https://gluonhq.com/products/javafx/
 
