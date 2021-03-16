@@ -6,6 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import settings.Settings;
 
 public class Player extends Creature{
 
@@ -19,9 +20,9 @@ public class Player extends Creature{
     SpriteAnimation animation;
 
     public Player(Handler handler, Pane pane, Image image, float x, float y){
-        super(handler, pane, image, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
-        imageView.setFitWidth(DEFAULT_CREATURE_WIDTH);
-        imageView.setFitHeight(DEFAULT_CREATURE_HEIGHT);
+        super(handler, pane, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
         imageView.setViewport(new Rectangle2D(offsetX,offsetY,width,height));
         animation = new SpriteAnimation(imageView, Duration.millis(1000),count,columns,offsetX,offsetY,width,height);
 

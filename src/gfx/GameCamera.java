@@ -2,6 +2,7 @@ package gfx;
 
 import entities.Entity;
 import game.Handler;
+import settings.Settings;
 import tiles.Tile;
 
 public class GameCamera {
@@ -18,14 +19,14 @@ public class GameCamera {
     public void checkBlankSpace(){
         if(xOffset < 0){
             xOffset = 0;
-        } else if(xOffset > handler.getWorld().getWidth() * Tile.TILE_WIDTH - handler.getWidth()){
-            xOffset = handler.getWorld().getWidth() * Tile.TILE_WIDTH - handler.getWidth();
+        } else if(xOffset > handler.getWorld().getWidth() * Settings.TILE_WIDTH - handler.getWidth()){
+            xOffset = handler.getWorld().getWidth() * Settings.TILE_WIDTH - handler.getWidth();
         }
 
         if(yOffset < 0){
             yOffset = 0;
-        } else if(yOffset > handler.getWorld().getHeight() * Tile.TILE_HEIGHT - handler.getHeight()){
-            yOffset = handler.getWorld().getHeight() * Tile.TILE_HEIGHT - handler.getHeight();
+        } else if(yOffset > handler.getWorld().getHeight() * Settings.TILE_HEIGHT - handler.getHeight()){
+            yOffset = handler.getWorld().getHeight() * Settings.TILE_HEIGHT - handler.getHeight();
         }
     }
 

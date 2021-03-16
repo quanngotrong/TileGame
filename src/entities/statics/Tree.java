@@ -3,12 +3,12 @@ package entities.statics;
 import game.Handler;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import tiles.Tile;
+import settings.Settings;
 
 public class Tree extends StaticEntity{
 
     public Tree(Handler handler, Pane pane, Image image, float x, float y){
-        super(handler, pane, image, x, y, Tile.TILE_WIDTH, (int) (Tile.TILE_HEIGHT*2*0.7));
+        super(handler, pane, image, x, y, Settings.TILE_WIDTH, (int) (Settings.TILE_HEIGHT*2*0.7));
 
         bounds.setX(36);
         bounds.setY(65);

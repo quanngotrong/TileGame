@@ -6,6 +6,7 @@ import entities.statics.Tree;
 import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
+import settings.Settings;
 import tiles.Tile;
 import utils.Utils;
 
@@ -42,15 +43,15 @@ public class World {
     }
 
     public void render(GraphicsContext g){
-        int xStart = (int) (Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILE_WIDTH));
-        int xEnd = (int) (Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILE_WIDTH + 1));
-        int yStart = (int) (Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILE_HEIGHT));
-        int yEnd = (int) (Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILE_HEIGHT + 1));
+        int xStart = (int) (Math.max(0, handler.getGameCamera().getxOffset() / Settings.TILE_WIDTH));
+        int xEnd = (int) (Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Settings.TILE_WIDTH + 1));
+        int yStart = (int) (Math.max(0, handler.getGameCamera().getyOffset() / Settings.TILE_HEIGHT));
+        int yEnd = (int) (Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Settings.TILE_HEIGHT + 1));
 
         for(int y = yStart; y < yEnd; y++){
             for(int x = xStart; x < xEnd; x++){
-                getTile(x, y).render(g, (int) (x*Tile.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-                                        (int) (y*Tile.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+                getTile(x, y).render(g, (int) (x* Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
+                                        (int) (y* Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
 

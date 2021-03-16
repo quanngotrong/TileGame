@@ -9,9 +9,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import settings.Settings;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -23,9 +23,8 @@ public class Game extends Application {
     Canvas worldBase;
 
     Scene scene;
-    private int width = 600, height = 600;
 
-    private ImageView imageView;
+    private int width = Settings.STAGE_WIDTH, height = Settings.STAGE_HEIGHT;
 
     //States
     private State gameState;
@@ -54,6 +53,7 @@ public class Game extends Application {
 
         stage.setScene(scene);
         stage.setTitle("Tile Game");
+        stage.setResizable(false);
         stage.show();
 
         handler = new Handler(this);

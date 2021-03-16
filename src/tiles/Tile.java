@@ -2,7 +2,7 @@ package tiles;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import settings.Settings;
 
 
 public class Tile {
@@ -11,8 +11,6 @@ public class Tile {
     public static Tile grassTile = new GrassTile(0);
     public static Tile dirtTile = new DirtTile(1);
     public static Tile rockTile = new RockTile(2);
-
-    public static final int TILE_WIDTH = 64, TILE_HEIGHT = 64;
 
 
     protected Image image;
@@ -30,7 +28,7 @@ public class Tile {
     }
 
     public void render(GraphicsContext g, int x, int y){
-        g.drawImage(image, x, y, TILE_WIDTH, TILE_WIDTH);
+        g.drawImage(image, x, y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
     }
 
     public boolean isSolid(){
