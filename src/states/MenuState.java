@@ -2,16 +2,14 @@ package states;
 
 import game.Game;
 import game.Handler;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 
 public class MenuState extends State{
 
 
-    private Pane pane;
-
-    public MenuState(Handler handler, Pane pane){
+    public MenuState(Handler handler){
         super(handler);
-        this.pane = pane;
     }
 
     @Override
@@ -20,7 +18,7 @@ public class MenuState extends State{
     }
 
     @Override
-    public void render() {
+    public void render(GraphicsContext g) {
 
     }
 }

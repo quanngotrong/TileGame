@@ -3,7 +3,10 @@ package entities.creatures;
 import game.Handler;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -20,9 +23,13 @@ public class Player extends Creature{
     int height = 64;
 
     SpriteAnimation animation;
+    Image player;
 
-    public Player(Handler handler, Pane pane, Image image, float x, float y){
-        super(handler, pane, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT);
+
+    public Player(Handler handler, Image image, float x, float y){
+        super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT);
+
+        imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         imageView.setViewport(new Rectangle2D(offsetX,offsetY,width,height));
@@ -51,28 +58,35 @@ public class Player extends Creature{
         if(handler.getKeyManager().isMoveUp()){
             yMove = -speed;
             animation.setOffsetY(0);
+
         }
         if(handler.getKeyManager().isMoveDown()){
             yMove = speed;
             animation.setOffsetY(128);
+
         }
         if(handler.getKeyManager().isMoveLeft()){
             xMove = -speed;
             animation.setOffsetY(64);
+
         }
         if(handler.getKeyManager().isMoveRight()){
             xMove = speed;
             animation.setOffsetY(192);
+
         }
     }
 
     @Override
-    public void render() {
+    public void render(GraphicsContext g) {
         if(xMove != 0 || yMove != 0)
             animation.play();
         else animation.stop();
 
-        imageView.relocate((int)(x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
+        player = imageView.snapshot(params, null);
+        g.drawImage(player, (int)(x - handler.getGameCamera().getxOffset()),
+                (int) (y - handler.getGameCamera().getyOffset()));
+
         zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
     }
 }

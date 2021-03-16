@@ -12,8 +12,8 @@ public abstract class Creature extends Entity {
     protected float speed;
     protected float xMove, yMove;
 
-    public Creature(Handler handler, Pane pane, Image image, float x, float y, int width, int height){
-        super(handler, pane, image, x, y, width, height);
+    public Creature(Handler handler, Image image, float x, float y, int width, int height){
+        super(handler, image, x, y, width, height);
         health = Settings.DEFAULT_HEALTH;
         speed = Settings.DEFAULT_SPEED;
         xMove = 0;

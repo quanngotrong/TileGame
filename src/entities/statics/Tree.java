@@ -1,14 +1,15 @@
 package entities.statics;
 
 import game.Handler;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import settings.Settings;
 
 public class Tree extends StaticEntity{
 
-    public Tree(Handler handler, Pane pane, Image image, float x, float y){
-        super(handler, pane, image, x, y, Settings.TILE_WIDTH, (int) (Settings.TILE_HEIGHT*2*0.7));
+    public Tree(Handler handler, Image image, float x, float y){
+        super(handler, image, x, y, Settings.TILE_WIDTH, (int) (Settings.TILE_HEIGHT*2*0.7));
 
         bounds.setX(36);
         bounds.setY(65);
@@ -22,10 +23,12 @@ public class Tree extends StaticEntity{
     }
 
     @Override
-    public void render() {
-        imageView.setFitHeight(height);
-        imageView.setPreserveRatio(true);
-        imageView.relocate((int)(x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
+    public void render(GraphicsContext g) {
+//        imageView.setFitHeight(height);
+//        imageView.setPreserveRatio(true);
+//        imageView.relocate((int)(x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
 
+        g.drawImage(image, (int)(x - handler.getGameCamera().getxOffset()),
+                (int) (y - handler.getGameCamera().getyOffset()), width, height);
     }
 }

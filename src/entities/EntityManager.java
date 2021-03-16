@@ -2,6 +2,7 @@ package entities;
 
 import entities.creatures.Player;
 import game.Handler;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,20 +24,12 @@ public class EntityManager {
         for (Entity e : entities) {
             e.tick();
         }
-        sortEntity();
-    }
-
-    public void render(){
-        for(Entity e: entities){
-            e.render();
-        }
-    }
-
-    public void sortEntity(){
         entities.sort(renderSort);
-        handler.getGameStatePane().getChildren().clear();
-        for(Entity e : entities){
-            e.pane.getChildren().addAll(e.imageView);
+    }
+
+    public void render(GraphicsContext g){
+        for(Entity e: entities){
+            e.render(g);
         }
     }
 

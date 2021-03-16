@@ -24,15 +24,15 @@ public class World {
 
     public World(Handler handler, String path){
         this.handler = handler;
-        entityManager = new EntityManager(handler, new Player(handler, handler.getGameStatePane(), Assets.player, 100, 100));
+        entityManager = new EntityManager(handler, new Player(handler, Assets.player, 100, 100));
         for(int i = 0; i < 6; i++){
-            entityManager.addEntity(new Tree(handler, handler.getGameStatePane(), Assets.tree1, 175 + 100*i, 55));
-            entityManager.addEntity(new Tree(handler, handler.getGameStatePane(), Assets.tree12, 175 + 100*i, 140));
+            entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 55));
+            entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 140));
         }
 
         for(int i = 0; i < 4; i++){
-            entityManager.addEntity(new Tree(handler, handler.getGameStatePane(), Assets.tree12, 290 + 100*i, 800));
-            entityManager.addEntity(new Enemy(handler, handler.getGameStatePane(), Assets.player, 50 + 100*i, 300));
+            entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
+            entityManager.addEntity(new Enemy(handler, Assets.player, 50 + 100*i, 300));
         }
         loadWorld(path);
 
@@ -56,7 +56,7 @@ public class World {
             }
         }
 
-        entityManager.render();
+        entityManager.render(g);
     }
 
     public Tile getTile(int x, int y){

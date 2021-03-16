@@ -3,6 +3,8 @@ package entities;
 import entities.creatures.Enemy;
 import entities.creatures.Player;
 import game.Handler;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -15,33 +17,33 @@ public abstract class Entity {
 
     protected float x, y;
     protected int width, height;
-    protected Pane pane;
     protected Handler handler;
     protected Image image;
     protected ImageView imageView;
+    protected SnapshotParameters params;
+
     protected Rectangle bounds;
     public Circle zone;
 
-    public Entity(Handler handler, Pane pane, Image image, float x, float y, int width, int height){
+    public Entity(Handler handler, Image image, float x, float y, int width, int height){
         this.handler = handler;
-        this.pane = pane;
         this.image = image;
-        imageView = new ImageView(image);
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
+        params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+
         bounds = new Rectangle(0, 0, width, height);
         zone = new Circle(0, 0, 100);
-        pane.getChildren().addAll(imageView);
-
     }
 
     public abstract void tick();
 
-    public abstract void render();
+    public abstract void render(GraphicsContext g);
 
     public boolean checkEntityCollision(float xOffset, float yOffset){
         for(Entity e : handler.getWorld().getEntityManager().getEntities()){
@@ -61,7 +63,6 @@ public abstract class Entity {
     }
 
     //Getters & Setters
-
 
     public float getX() {
         return x;
@@ -86,10 +87,5 @@ public abstract class Entity {
     public int getHeight() {
         return height;
     }
-
-    public Pane getPane(){
-        return pane;
-    }
-
 
 }

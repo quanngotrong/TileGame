@@ -7,8 +7,8 @@ import javafx.scene.layout.Pane;
 
 public abstract class StaticEntity extends Entity {
 
-    public StaticEntity(Handler handler, Pane pane, Image image, float x, float y, int width, int height){
-        super(handler, pane, image, x, y, width, height);
+    public StaticEntity(Handler handler, Image image, float x, float y, int width, int height){
+        super(handler, image, x, y, width, height);
     }
 
 }

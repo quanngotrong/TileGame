@@ -3,7 +3,9 @@ package game;
 import gfx.GameCamera;
 import input.KeyManager;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import worlds.World;
 
 public class Handler {
@@ -19,16 +21,16 @@ public class Handler {
         return game;
     }
 
+    public GraphicsContext getGraphicsContext(){
+        return game.getGraphicsContext();
+    }
+
+    public StackPane getPane(){
+        return game.getPane();
+    }
+
     public KeyManager getKeyManager(){
         return game.getKeyManager();
-    }
-
-    public Canvas getWorldBase(){
-        return game.getWorldBase();
-    }
-
-    public Pane getGameStatePane(){
-        return game.getGameStatePane();
     }
 
     public GameCamera getGameCamera(){

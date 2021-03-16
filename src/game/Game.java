@@ -9,7 +9,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import settings.Settings;
 import states.GameState;
@@ -18,10 +20,9 @@ import states.State;
 
 public class Game extends Application {
 
-    Pane gameStatePane;
-    Pane menuStatePane;
-    Canvas worldBase;
-
+    Canvas canvas;
+    GraphicsContext g;
+    StackPane root;
     Scene scene;
 
     private int width = Settings.STAGE_WIDTH, height = Settings.STAGE_HEIGHT;
@@ -42,12 +43,10 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        worldBase = new Canvas(width, height);
-        gameStatePane = new Pane();
-        menuStatePane = new Pane();
+        canvas = new Canvas(width, height);
+        root = new StackPane(canvas);
 
-        Group root = new Group();
-        root.getChildren().addAll(worldBase, gameStatePane);
+        g = canvas.getGraphicsContext2D();
 
         scene = new Scene(root, width, height);
 
@@ -58,8 +57,8 @@ public class Game extends Application {
 
         handler = new Handler(this);
 
-        gameState = new GameState(handler, gameStatePane);
-        menuState = new MenuState(handler, menuStatePane);
+        gameState = new GameState(handler);
+        menuState = new MenuState(handler);
         State.setState(gameState);
 
         keyManager = new KeyManager(scene);
@@ -85,7 +84,7 @@ public class Game extends Application {
 
     public void render(){
         if(State.getState() != null)
-            State.getState().render();
+            State.getState().render(g);
     }
 
 
@@ -105,16 +104,20 @@ public class Game extends Application {
         return keyManager;
     }
 
-    public Canvas getWorldBase() {
-        return worldBase;
+    public Canvas getCanvas(){
+        return canvas;
     }
 
-    public Pane getGameStatePane(){
-        return gameStatePane;
+    public GraphicsContext getGraphicsContext(){
+        return g;
     }
 
     public Game getGame(){
         return this;
+    }
+
+    public StackPane getPane(){
+        return root;
     }
 
     public GameCamera getGameCamera() {

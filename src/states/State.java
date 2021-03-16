@@ -2,6 +2,7 @@ package states;
 
 import game.Game;
 import game.Handler;
+import javafx.scene.canvas.GraphicsContext;
 
 public abstract class State {
 
@@ -23,5 +24,5 @@ public abstract class State {
     }
     public abstract void tick();
 
-    public abstract void render();
+    public abstract void render(GraphicsContext g);
 }

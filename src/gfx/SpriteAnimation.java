@@ -43,6 +43,7 @@ public class SpriteAnimation extends Transition{
     public void setOffsetY(int y){
         this.offsetY = y;
     }
+
     protected void interpolate(double frac) {
         final int index = Math.min((int)Math.floor(count*frac), count-1);
         final int x = (index%columns)*width+offsetX;

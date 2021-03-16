@@ -4,7 +4,9 @@ import entities.Entity;
 import game.Handler;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -22,9 +24,12 @@ public class Enemy extends Creature{
     int height = 64;
 
     SpriteAnimation animation;
+    Image enemy;
 
-    public Enemy(Handler handler, Pane pane, Image image, float x, float y){
-        super(handler, pane, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT);
+    public Enemy(Handler handler,  Image image, float x, float y){
+        super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT);
+
+        imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         imageView.setViewport(new Rectangle2D(offsetX,offsetY,width,height));
@@ -63,30 +68,38 @@ public class Enemy extends Creature{
             if(y > handler.getWorld().getEntityManager().getPlayer().getY() + 1){ //up
                 yMove = -speed + 2;
                 animation.setOffsetY(0);
+
             }
             if(y < handler.getWorld().getEntityManager().getPlayer().getY() - 1){ //down
                 yMove = speed - 2;
                 animation.setOffsetY(128);
+
             }
             if(x < handler.getWorld().getEntityManager().getPlayer().getX() - 1){ //right
                 xMove = speed - 2;
                 animation.setOffsetY(192);
+
             }
             if(x > handler.getWorld().getEntityManager().getPlayer().getX() + 1){ //left
                 xMove = -speed + 2;
                 animation.setOffsetY(64);
+
             }
         }
     }
 
 
     @Override
-    public void render() {
+    public void render(GraphicsContext g) {
         if(xMove != 0 || yMove != 0)
             animation.play();
         else animation.stop();
 
-        imageView.relocate((int)(x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
+        enemy = imageView.snapshot(params, null);
+
+        g.drawImage(enemy, (int)(x - handler.getGameCamera().getxOffset()),
+                (int) (y - handler.getGameCamera().getyOffset()));
+
         zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
     }
 }
