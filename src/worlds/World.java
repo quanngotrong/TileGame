@@ -1,6 +1,7 @@
 package worlds;
 
 import entities.EntityManager;
+import entities.creatures.Enemy;
 import entities.creatures.Player;
 import entities.statics.Tree;
 import game.Handler;
@@ -31,7 +32,7 @@ public class World {
 
         for(int i = 0; i < 4; i++){
             entityManager.addEntity(new Tree(handler, handler.getGameStatePane(), Assets.tree12, 290 + 100*i, 800));
-
+            entityManager.addEntity(new Enemy(handler, handler.getGameStatePane(), Assets.player, 50 + 100*i, 300));
         }
         loadWorld(path);
 

@@ -5,6 +5,8 @@ import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import settings.Settings;
 
@@ -30,6 +32,9 @@ public class Player extends Creature{
         bounds.setY(38);
         bounds.setWidth(16);
         bounds.setHeight(24);
+
+        zone.setCenterX(-70);
+        zone.setCenterY(-53);
     }
 
     @Override
@@ -63,11 +68,11 @@ public class Player extends Creature{
 
     @Override
     public void render() {
-        if(handler.getKeyManager().isMoveUp() || handler.getKeyManager().isMoveDown()
-                || handler.getKeyManager().isMoveRight() || handler.getKeyManager().isMoveLeft())
+        if(xMove != 0 || yMove != 0)
             animation.play();
         else animation.stop();
 
         imageView.relocate((int)(x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()));
+        zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
     }
 }

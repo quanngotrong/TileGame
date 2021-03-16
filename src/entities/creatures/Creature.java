@@ -5,7 +5,6 @@ import game.Handler;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import settings.Settings;
-import tiles.Tile;
 
 public abstract class Creature extends Entity {
 
