@@ -18,7 +18,8 @@ public abstract class Entity {
     protected Image image;
     protected ImageView imageView;
     protected SnapshotParameters params;
-    protected int health;
+    protected int health, maxHealth;
+
     protected boolean active = true;
 
     protected Rectangle bounds;
@@ -34,6 +35,7 @@ public abstract class Entity {
         this.height = height;
 
         health = Settings.DEFAULT_HEALTH;
+        maxHealth = health;
 
 
         params = new SnapshotParameters();
@@ -96,8 +98,16 @@ public abstract class Entity {
         return width;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public int getHeight() {
         return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public int getHealth() {

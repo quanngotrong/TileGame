@@ -3,6 +3,8 @@ package worlds;
 import entities.EntityManager;
 import entities.creatures.Enemy;
 import entities.creatures.Player;
+import entities.creatures.Skeleton;
+import entities.creatures.Slime;
 import entities.statics.Tree;
 import game.Handler;
 import gfx.Assets;
@@ -16,7 +18,8 @@ public class World {
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
-    private Enemy mobs;
+    private Enemy skeleton;
+    private Slime slime;
 
     //Entities
     private EntityManager entityManager;
@@ -25,7 +28,7 @@ public class World {
 
     public World(Handler handler, String path){
         this.handler = handler;
-        entityManager = new EntityManager(handler, new Player(handler, Assets.skeleton, 100, 100));
+        entityManager = new EntityManager(handler, new Player(handler, Assets.skeleton, 100, 100, 20));
         for(int i = 0; i < 6; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 55));
             entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 140));
@@ -35,8 +38,11 @@ public class World {
             entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
         }
 
-        mobs = new Enemy(handler, Assets.skeleton, 100, 200);
-        entityManager.addEntity(mobs);
+        skeleton = new Skeleton(handler, Assets.skeleton, 100, 200, 10);
+        entityManager.addEntity(skeleton);
+
+        slime = new Slime(handler, Assets.skeleton, 200, 400, 15);
+        entityManager.addEntity(slime);
         loadWorld(path);
 
     }

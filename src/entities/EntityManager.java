@@ -23,7 +23,7 @@ public class EntityManager{
     }
 
     public void tick(){
-        i=entities.iterator();
+        i = entities.iterator();
         while(i.hasNext()){
             Entity e = (Entity) i.next();
             e.tick();

@@ -7,12 +7,14 @@ import settings.Settings;
 
 public abstract class Creature extends Entity {
 
-    protected int health;
     protected float speed;
     protected float xMove, yMove;
+    protected int direction = 0; //1-up, 2-down, 3-left, 4-right
+    protected int damage;
 
-    public Creature(Handler handler, Image image, float x, float y, int width, int height){
+    public Creature(Handler handler, Image image, float x, float y, int width, int height, int damage){
         super(handler, image, x, y, width, height);
+        this.damage = damage;
         speed = Settings.DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
@@ -31,7 +33,7 @@ public abstract class Creature extends Entity {
 
             if(!collisionWithTile(tx, (int) (y + bounds.getY()) / Settings.TILE_HEIGHT) &&
                     !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)){
-                x += xMove;
+                x += xMove/2;
             } else {
                 x = (int) (tx * Settings.TILE_WIDTH - bounds.getX() - bounds.getWidth() - 1);
             }
@@ -40,7 +42,7 @@ public abstract class Creature extends Entity {
 
             if (!collisionWithTile(tx, (int) (y + bounds.getY()) / Settings.TILE_HEIGHT) &&
                     !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)) {
-                x += xMove;
+                x += xMove/2;
             } else {
                 x = (int) (tx* Settings.TILE_WIDTH + Settings.TILE_WIDTH - bounds.getX());
             }
@@ -53,7 +55,7 @@ public abstract class Creature extends Entity {
 
             if(!collisionWithTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
                     !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
-                y += yMove;
+                y += yMove/2;
             } else {
                 y = (int) (ty * Settings.TILE_HEIGHT + Settings.TILE_HEIGHT - bounds.getY());
             }
@@ -62,7 +64,7 @@ public abstract class Creature extends Entity {
 
             if(!collisionWithTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
                     !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
-                y += yMove;
+                y += yMove/2;
             } else {
                 y= (int) (ty * Settings.TILE_HEIGHT - bounds.getY() - bounds.getHeight() - 1);
             }

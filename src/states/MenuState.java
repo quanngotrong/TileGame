@@ -17,7 +17,7 @@ public class MenuState extends State{
 
         uiManager.addObject(new UIImageButton(230, 150,128, 64, Assets.btn_start,
                 () -> {
-                    handler.getMouseManager().setUiManager(null);
+//                    handler.getMouseManager().setUiManager(null);
                     State.setState(handler.getGame().gameState);
                 }));
     }
@@ -25,9 +25,6 @@ public class MenuState extends State{
     @Override
     public void tick() {
         uiManager.tick();
-
-        handler.getMouseManager().setUiManager(null);
-        State.setState(handler.getGame().gameState);
     }
 
     @Override

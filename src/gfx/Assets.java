@@ -7,6 +7,7 @@ public class Assets {
     private static final int width = 32, height = 32;
     public static Image tree1, tree12, dirt, grass, stone, skeleton, player;
     public static Image[] btn_start;
+    public static Image[] slime_up, slime_down, slime_left, slime_right;
 
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
@@ -22,6 +23,21 @@ public class Assets {
         btn_start = new Image[2];
         btn_start[0] = sheet.crop(width*6, height*4, width*2, height);
         btn_start[1] = sheet.crop(width*6, height*5, width*2, height);
+
+        slime_up = new Image[4];
+        for(int i = 0; i < 4; i++)
+            slime_up[i] = ImageLoader.loadImage("res/textures/slime/SlimeUp_" + i + ".png");
+
+        slime_down = new Image[4];
+        for(int i = 0; i < 4; i++)
+            slime_down[i] = ImageLoader.loadImage("res/textures/slime/SlimeDown_" + i + ".png");
+
+        slime_left = new Image[4];
+        for(int i = 0; i < 4; i++)
+            slime_left[i] = ImageLoader.loadImage("res/textures/slime/SlimeLeft_" + i + ".png");
+        slime_right = new Image[4];
+        for(int i = 0; i < 4; i++)
+            slime_right[i] = ImageLoader.loadImage("res/textures/slime/SlimeRight_" + i + ".png");
 
     }
 }
