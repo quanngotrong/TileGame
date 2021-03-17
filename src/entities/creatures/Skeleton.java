@@ -6,6 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 
@@ -79,6 +80,14 @@ public class Skeleton extends Enemy{
         enemy = imageView.snapshot(params, null);
         g.drawImage(enemy, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
+
+        //draw health bar
+        g.setFill(Color.BLACK);
+        g.strokeRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
+                (int) (y - handler.getGameCamera().getyOffset()),40,5);
+        g.setFill(Color.GREEN);
+        g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
+                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) /(float) maxHealth), 4);
 
     }
 

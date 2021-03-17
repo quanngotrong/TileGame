@@ -3,6 +3,7 @@ package entities.creatures;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import settings.Settings;
@@ -106,6 +107,8 @@ public class Enemy extends Creature{
     @Override
     public void render(GraphicsContext g) {
         zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
+
+
     }
 
     @Override

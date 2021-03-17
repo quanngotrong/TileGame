@@ -5,6 +5,7 @@ import gfx.Assets;
 import gfx.ImageAnimation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class Slime extends Enemy{
 
@@ -52,6 +53,14 @@ public class Slime extends Enemy{
 //        g.fillRect((int) (x + bounds.getX() - handler.getGameCamera().getxOffset()),
 //                (int) (y + bounds.getY() - handler.getGameCamera().getyOffset()),
 //                bounds.getWidth(), bounds.getHeight());
+
+        //draw health bar
+        g.setFill(Color.BLACK);
+        g.strokeRect((int)(x - handler.getGameCamera().getxOffset() - 4),
+                (int) (y - handler.getGameCamera().getyOffset() - 5),40,5);
+        g.setFill(Color.GREEN);
+        g.fillRect((int)(x - handler.getGameCamera().getxOffset() - 4),
+                (int) (y - handler.getGameCamera().getyOffset() - 5), 40 * ((float) (health) /(float) maxHealth), 4);
     }
 
     private Image getCurrentAnimationFrame(){

@@ -8,6 +8,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import settings.Settings;
@@ -33,7 +34,7 @@ public class Player extends Creature{
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(5);
-        setHealth(1);
+//        setHealth(1);
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -146,13 +147,21 @@ public class Player extends Creature{
 
     @Override
     public void render(GraphicsContext g) {
+        //draw player
         if(xMove != 0 || yMove != 0)
             animation.play();
         else animation.stop();
-
         player = imageView.snapshot(params, null);
         g.drawImage(player, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
         zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
+
+        //draw health bar
+        g.setFill(Color.BLACK);
+        g.strokeRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
+                (int) (y - handler.getGameCamera().getyOffset()),40,5);
+        g.setFill(Color.GREEN);
+        g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
+                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) /(float) maxHealth), 4);
     }
 }
