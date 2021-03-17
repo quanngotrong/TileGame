@@ -3,14 +3,13 @@ package game;
 import gfx.Assets;
 import gfx.GameCamera;
 import input.KeyManager;
+import input.MouseManager;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import settings.Settings;
@@ -20,18 +19,19 @@ import states.State;
 
 public class Game extends Application {
 
-    Canvas canvas;
-    GraphicsContext g;
-    StackPane root;
-    Scene scene;
+    private Canvas canvas;
+    private GraphicsContext g;
+    private StackPane root;
+    private Scene scene;
 
     private int width = Settings.STAGE_WIDTH, height = Settings.STAGE_HEIGHT;
 
     //States
-    private State gameState;
-    private State menuState;
+    public State gameState;
+    public State menuState;
     //Input
     private KeyManager keyManager;
+    private MouseManager mouseManager;
     //Camera
     private GameCamera gameCamera;
     //Handler
@@ -57,12 +57,14 @@ public class Game extends Application {
 
         handler = new Handler(this);
 
-        gameState = new GameState(handler);
-        menuState = new MenuState(handler);
-        State.setState(gameState);
-
         keyManager = new KeyManager(scene);
         keyManager.addListener();
+        mouseManager = new MouseManager(scene);
+        mouseManager.addListener();
+
+        gameState = new GameState(handler);
+        menuState = new MenuState(handler);
+        State.setState(menuState);
 
         gameCamera = new GameCamera(handler,0,0);
 
@@ -71,7 +73,7 @@ public class Game extends Application {
             @Override
             public void handle(long l) {
                 tick();
-                render();
+                render(g);
             }
         };
         gameLoop.start();
@@ -82,7 +84,11 @@ public class Game extends Application {
             State.getState().tick();
     }
 
-    public void render(){
+    public void render(GraphicsContext g){
+        //refresh screen
+        g.clearRect(0, 0, width, height);
+
+        //start drawing
         if(State.getState() != null)
             State.getState().render(g);
     }
@@ -102,6 +108,10 @@ public class Game extends Application {
 
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+
+    public MouseManager getMouseManager(){
+        return mouseManager;
     }
 
     public Canvas getCanvas(){

@@ -2,9 +2,8 @@ package game;
 
 import gfx.GameCamera;
 import input.KeyManager;
-import javafx.scene.canvas.Canvas;
+import input.MouseManager;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import worlds.World;
 
@@ -31,6 +30,10 @@ public class Handler {
 
     public KeyManager getKeyManager(){
         return game.getKeyManager();
+    }
+
+    public MouseManager getMouseManager() {
+        return game.getMouseManager();
     }
 
     public GameCamera getGameCamera(){

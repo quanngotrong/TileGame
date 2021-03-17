@@ -1,15 +1,11 @@
 package entities.creatures;
 
-import entities.Entity;
 import game.Handler;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import settings.Settings;
@@ -60,6 +56,7 @@ public class Enemy extends Creature{
     }
 
 
+
     public void getMove(){
         xMove = 0;
         yMove = 0;
@@ -83,8 +80,8 @@ public class Enemy extends Creature{
             if(x > handler.getWorld().getEntityManager().getPlayer().getX() + 1){ //left
                 xMove = -speed + 2;
                 animation.setOffsetY(64);
-
             }
+
         }
     }
 
@@ -101,5 +98,10 @@ public class Enemy extends Creature{
                 (int) (y - handler.getGameCamera().getyOffset()));
 
         zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
+    }
+
+    @Override
+    public void die() {
+
     }
 }

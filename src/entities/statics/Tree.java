@@ -4,7 +4,6 @@ import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import settings.Settings;
 
 public class Tree extends StaticEntity{
@@ -35,5 +34,10 @@ public class Tree extends StaticEntity{
         tree = imageView.snapshot(params, null);
         g.drawImage(tree, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
+    }
+
+    @Override
+    public void die() {
+
     }
 }

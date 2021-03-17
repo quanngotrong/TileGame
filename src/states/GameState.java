@@ -2,7 +2,6 @@ package states;
 
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import worlds.World;
 
 public class GameState extends State{

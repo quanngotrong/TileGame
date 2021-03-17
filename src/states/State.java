@@ -1,6 +1,5 @@
 package states;
 
-import game.Game;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 

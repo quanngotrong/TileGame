@@ -37,4 +37,7 @@ public class KeyManager {
     public boolean isMoveRight(){
         return keys.getOrDefault(KeyCode.RIGHT, false);
     }
+    public boolean isSpace() {
+        return keys.getOrDefault(KeyCode.SPACE, false);
+    }
 }

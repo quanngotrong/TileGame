@@ -3,7 +3,6 @@ package entities.creatures;
 import entities.Entity;
 import game.Handler;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import settings.Settings;
 
 public abstract class Creature extends Entity {
@@ -14,7 +13,6 @@ public abstract class Creature extends Entity {
 
     public Creature(Handler handler, Image image, float x, float y, int width, int height){
         super(handler, image, x, y, width, height);
-        health = Settings.DEFAULT_HEALTH;
         speed = Settings.DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
@@ -77,14 +75,6 @@ public abstract class Creature extends Entity {
 
 
     //Getters & Setters
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     public float getSpeed() {
         return speed;

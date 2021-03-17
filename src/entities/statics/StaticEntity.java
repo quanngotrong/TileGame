@@ -3,7 +3,6 @@ package entities.statics;
 import entities.Entity;
 import game.Handler;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 
 public abstract class StaticEntity extends Entity {
 

@@ -16,6 +16,7 @@ public class World {
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
+    private Enemy mobs;
 
     //Entities
     private EntityManager entityManager;
@@ -24,7 +25,7 @@ public class World {
 
     public World(Handler handler, String path){
         this.handler = handler;
-        entityManager = new EntityManager(handler, new Player(handler, Assets.player, 100, 100));
+        entityManager = new EntityManager(handler, new Player(handler, Assets.skeleton, 100, 100));
         for(int i = 0; i < 6; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 55));
             entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 140));
@@ -32,14 +33,16 @@ public class World {
 
         for(int i = 0; i < 4; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
-            entityManager.addEntity(new Enemy(handler, Assets.player, 50 + 100*i, 300));
         }
+
+        mobs = new Enemy(handler, Assets.skeleton, 100, 200);
+        entityManager.addEntity(mobs);
         loadWorld(path);
 
     }
 
 
-    public void tick(){
+    public void tick() {
         entityManager.tick();
     }
 

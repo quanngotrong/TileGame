@@ -5,8 +5,9 @@ import javafx.scene.image.Image;
 public class Assets {
 
     private static final int width = 32, height = 32;
-    public static Image tree1, tree12, dirt, grass, stone, player;
-    public static Image[] player_up, player_down, player_left, player_right;
+    public static Image tree1, tree12, dirt, grass, stone, skeleton, player;
+    public static Image[] btn_start;
+
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
         tree1 = ImageLoader.loadImage("res/textures/tree.png");
@@ -15,11 +16,12 @@ public class Assets {
         grass = sheet.crop(width * 2, 0, width, height);
         stone = sheet.crop(width * 3, 0, width, height);
 
-        player = ImageLoader.loadImage("res/textures/skeleton.png");
-//        SpriteSheet playerSheet = new SpriteSheet(ImageLoader.loadImage("res/textures/skeleton.png"));
-//        player_up = new Image[10];
-//        for(int i = 0; i < 9; i++){
-//            player_up[i] = playerSheet.crop(0, 0, 64, 64);
-//        }
+        skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
+        player = ImageLoader.loadImage("res/textures/minotaur.png");
+
+        btn_start = new Image[2];
+        btn_start[0] = sheet.crop(width*6, height*4, width*2, height);
+        btn_start[1] = sheet.crop(width*6, height*5, width*2, height);
+
     }
 }

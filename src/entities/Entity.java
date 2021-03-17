@@ -1,17 +1,14 @@
 package entities;
 
-import entities.creatures.Enemy;
-import entities.creatures.Player;
 import game.Handler;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import settings.Settings;
 
 public abstract class Entity {
 
@@ -21,6 +18,8 @@ public abstract class Entity {
     protected Image image;
     protected ImageView imageView;
     protected SnapshotParameters params;
+    protected int health;
+    protected boolean active = true;
 
     protected Rectangle bounds;
     public Circle zone;
@@ -34,6 +33,9 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
 
+        health = Settings.DEFAULT_HEALTH;
+
+
         params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
 
@@ -44,6 +46,16 @@ public abstract class Entity {
     public abstract void tick();
 
     public abstract void render(GraphicsContext g);
+
+    public abstract void die();
+
+    public void takeDamage(int amount){
+        health -= amount;
+        if(health <= 0){
+            active = false;
+            die();
+        }
+    }
 
     public boolean checkEntityCollision(float xOffset, float yOffset){
         for(Entity e : handler.getWorld().getEntityManager().getEntities()){
@@ -88,4 +100,19 @@ public abstract class Entity {
         return height;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

@@ -1,15 +1,13 @@
 package entities.creatures;
 
+import entities.Entity;
 import game.Handler;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import settings.Settings;
 
@@ -25,6 +23,10 @@ public class Player extends Creature{
     SpriteAnimation animation;
     Image player;
 
+    int direction = 0; //1-up, 2-down, 3-left, 4-right
+
+    //Attack Timer
+    private long lastAttackTimer, attackCooldown = 500, attackTimer = attackCooldown;
 
     public Player(Handler handler, Image image, float x, float y){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT);
@@ -46,9 +48,54 @@ public class Player extends Creature{
 
     @Override
     public void tick() {
+        //Movement
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this);
+
+        //Attack
+        checkAttacks();
+    }
+
+    private void checkAttacks(){
+        attackTimer += System.currentTimeMillis() - lastAttackTimer;
+        lastAttackTimer = System.currentTimeMillis();
+        if(attackTimer < attackCooldown){
+            return;
+        }
+
+        Rectangle cb = getCollisionBounds(0, 0);
+        Rectangle ar = new Rectangle();
+        int arSize = 20;
+        ar.setWidth(arSize);
+        ar.setHeight(arSize);
+
+        if(handler.getKeyManager().isSpace() && direction == 1){
+            ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
+            ar.setY(cb.getY() - arSize);
+        } else if(handler.getKeyManager().isSpace() && direction == 2){
+            ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
+            ar.setY(cb.getY() + cb.getHeight());
+        } else if(handler.getKeyManager().isSpace() && direction == 3){
+            ar.setX(cb.getX() - arSize);
+            ar.setY(cb.getY() + cb.getHeight()/2 - arSize/2);
+        } else if(handler.getKeyManager().isSpace() && direction == 4){
+            ar.setX(cb.getX() + cb.getWidth());
+            ar.setY(cb.getY() + cb.getHeight()/2 - arSize/2);
+        } else {
+            return;
+        }
+
+        attackTimer = 0;
+
+        for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+            if(e.equals(this))
+                continue;
+            if(e.getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
+                e.takeDamage(1);
+                return;
+            }
+        }
     }
 
     public void getInput(){
@@ -56,25 +103,34 @@ public class Player extends Creature{
         yMove = 0;
 
         if(handler.getKeyManager().isMoveUp()){
+            direction = 1;
             yMove = -speed;
             animation.setOffsetY(0);
 
         }
         if(handler.getKeyManager().isMoveDown()){
+            direction = 2;
             yMove = speed;
             animation.setOffsetY(128);
 
         }
         if(handler.getKeyManager().isMoveLeft()){
+            direction = 3;
             xMove = -speed;
             animation.setOffsetY(64);
 
         }
         if(handler.getKeyManager().isMoveRight()){
+            direction = 4;
             xMove = speed;
             animation.setOffsetY(192);
 
         }
+    }
+
+    @Override
+    public void die() {
+        System.out.println("Ngu vcl :D");
     }
 
     @Override

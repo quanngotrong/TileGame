@@ -3,7 +3,6 @@ package gfx;
 import entities.Entity;
 import game.Handler;
 import settings.Settings;
-import tiles.Tile;
 
 public class GameCamera {
 
