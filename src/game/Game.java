@@ -11,11 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
 import settings.Settings;
 import states.GameState;
 import states.MenuState;
 import states.State;
+
+import java.io.File;
 
 public class Game extends Application {
 
@@ -67,6 +70,8 @@ public class Game extends Application {
         State.setState(menuState);
 
         gameCamera = new GameCamera(handler,0,0);
+
+
 
 
         AnimationTimer gameLoop = new AnimationTimer() {

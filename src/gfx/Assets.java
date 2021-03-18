@@ -1,6 +1,10 @@
 package gfx;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 
 public class Assets {
 
@@ -8,6 +12,7 @@ public class Assets {
     public static Image tree1, tree12, dirt, grass, stone, skeleton, player;
     public static Image[] btn_start;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
+    public static MediaPlayer mainSound, hurtSound, foot_step;
 
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
@@ -38,6 +43,10 @@ public class Assets {
         slime_right = new Image[4];
         for(int i = 0; i < 4; i++)
             slime_right[i] = ImageLoader.loadImage("res/textures/slime/SlimeRight_" + i + ".png");
+
+        mainSound = new MediaPlayer(new Media(new File("res/sounds/main_theme.mp3").toURI().toString()));
+        hurtSound = new MediaPlayer(new Media(new File("res/sounds/hurt.wav").toURI().toString()));
+        foot_step = new MediaPlayer(new Media(new File("res/sounds/foot_step.wav").toURI().toString()));
 
     }
 }

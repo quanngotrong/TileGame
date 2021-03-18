@@ -3,6 +3,7 @@ package states;
 import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
+import settings.Settings;
 import ui.UIImageButton;
 import ui.UIManager;
 
@@ -15,7 +16,7 @@ public class MenuState extends State{
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-        uiManager.addObject(new UIImageButton(230, 150,128, 64, Assets.btn_start,
+        uiManager.addObject(new UIImageButton(300, 230,200, 100, Assets.btn_start,
                 () -> {
 //                    handler.getMouseManager().setUiManager(null);
                     State.setState(handler.getGame().gameState);

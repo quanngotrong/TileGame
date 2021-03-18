@@ -1,15 +1,24 @@
 package entities.creatures;
 
 import game.Handler;
+import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+import javafx.scene.media.Media;
+
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import settings.Settings;
+import java.io.File;
+
+
 
 public class Enemy extends Creature{
 
+    //Music
+        String path = new File("res/sounds/naruto_theme.wav").toURI().toString();
+        MediaPlayer fightingSound = new MediaPlayer(new Media(path));
 
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 1000, attackTimer = attackCoolDown;
@@ -82,6 +91,7 @@ public class Enemy extends Creature{
         yMove = 0;
 
         if(checkPlayerZone()){
+//            fightingSound.play();
             if(y > handler.getWorld().getEntityManager().getPlayer().getY() + 1){ //up
                 direction = 1;
                 yMove = -speed;

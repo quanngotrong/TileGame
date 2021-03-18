@@ -8,6 +8,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -58,9 +60,10 @@ public class Player extends Creature{
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this);
-
         //Attack
         checkAttacks();
+        stepSound();
+
     }
 
     private void checkAttacks(){
@@ -135,6 +138,17 @@ public class Player extends Creature{
             direction = 4;
             xMove = speed;
             animation.setOffsetY(192);
+
+        }
+    }
+
+    public void stepSound(){
+        if(handler.getKeyManager().isMoveUp() || handler.getKeyManager().isMoveDown()
+            ||handler.getKeyManager().isMoveLeft() || handler.getKeyManager().isMoveRight()){
+            Assets.foot_step.setCycleCount(MediaPlayer.INDEFINITE);
+            Assets.foot_step.play();
+        } else {
+            Assets.foot_step.stop();
         }
     }
 
