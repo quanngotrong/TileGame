@@ -10,7 +10,9 @@ public class Assets {
 
     private static final int width = 32, height = 32;
     public static Image tree1, tree12, dirt, grass, stone, skeleton, player;
-    public static Image[] btn_start;
+//    public static Image[] btn_start;
+    public static Image background;
+    public static Image start, exit;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
     public static MediaPlayer mainSound, hurtSound, foot_step;
 
@@ -25,9 +27,13 @@ public class Assets {
         skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
         player = ImageLoader.loadImage("res/textures/minotaur.png");
 
-        btn_start = new Image[2];
-        btn_start[0] = sheet.crop(width*6, height*4, width*2, height);
-        btn_start[1] = sheet.crop(width*6, height*5, width*2, height);
+//        btn_start = new Image[2];
+//        btn_start[0] = sheet.crop(width*6, height*4, width*2, height);
+//        btn_start[1] = sheet.crop(width*6, height*5, width*2, height);
+
+        start = ImageLoader.loadImage("res/textures/start_button.png");
+        exit = ImageLoader.loadImage("res/textures/exit_button.png");
+        background = ImageLoader.loadImage("res/textures/background.jpg");
 
         slime_up = new Image[4];
         for(int i = 0; i < 4; i++)

@@ -25,9 +25,6 @@ public class Slime extends Enemy{
         bounds.setWidth(24);
         bounds.setHeight(20);
 
-        zone.setCenterX(-70);
-        zone.setCenterY(-53);
-
         slimeUp = new ImageAnimation(135, Assets.slime_up);
         slimeDown = new ImageAnimation(135, Assets.slime_down);
         slimeLeft = new ImageAnimation(135, Assets.slime_left);
@@ -46,13 +43,9 @@ public class Slime extends Enemy{
 
     @Override
     public void render(GraphicsContext g) {
-        super.render(g);
         g.drawImage(getCurrentAnimationFrame(), (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
 
-//        g.fillRect((int) (x + bounds.getX() - handler.getGameCamera().getxOffset()),
-//                (int) (y + bounds.getY() - handler.getGameCamera().getyOffset()),
-//                bounds.getWidth(), bounds.getHeight());
 
         //draw health bar
         g.setFill(Color.BLACK);

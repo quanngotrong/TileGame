@@ -4,6 +4,8 @@ import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import settings.Settings;
 import worlds.World;
 
 
@@ -28,6 +30,12 @@ public class GameState extends State{
     }
     @Override
     public void render(GraphicsContext g) {
+
         world.render(g);
+        g.setFill(Color.LAVENDER);
+        g.fillRect(Settings.STAGE_WIDTH - 200, 0, 200, 30);
+        g.setFill(Color.BLACK);
+        g.fillText("Thời gian hoặc điểm số gì đó", Settings.STAGE_WIDTH - 190, 20);
+
     }
 }

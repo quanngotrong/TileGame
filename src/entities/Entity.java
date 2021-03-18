@@ -24,8 +24,7 @@ public abstract class Entity {
 
     protected boolean active = true;
 
-    protected Rectangle bounds;
-    public Circle zone;
+    public Rectangle bounds;
 
     public Entity(Handler handler, Image image, float x, float y, int width, int height){
         this.handler = handler;
@@ -44,7 +43,7 @@ public abstract class Entity {
         params.setFill(Color.TRANSPARENT);
 
         bounds = new Rectangle(0, 0, width, height);
-        zone = new Circle(0, 0, 100);
+
     }
 
     public abstract void tick();

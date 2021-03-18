@@ -72,8 +72,6 @@ public class Game extends Application {
         gameCamera = new GameCamera(handler,0,0);
 
 
-
-
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long l) {

@@ -1,30 +1,27 @@
 package entities.creatures;
 
 import game.Handler;
-import gfx.Assets;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
 
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import settings.Settings;
-import java.io.File;
 
 
 
-public class Enemy extends Creature{
+public abstract class Enemy extends Creature{
 
     //Music
-        String path = new File("res/sounds/naruto_theme.wav").toURI().toString();
-        MediaPlayer fightingSound = new MediaPlayer(new Media(path));
 
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 1000, attackTimer = attackCoolDown;
 
+    //Zone
+    double enemyX, enemyY, playerX, playerY, distance;
+
     public Enemy(Handler handler,  Image image, float x, float y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
+        arSize = 20;
+
     }
 
     @Override
@@ -46,7 +43,7 @@ public class Enemy extends Creature{
 
         Rectangle cb = getCollisionBounds(0, 0);
         Rectangle ar = new Rectangle();
-        int arSize = 20;
+
         ar.setWidth(arSize);
         ar.setHeight(arSize);
 
@@ -66,22 +63,36 @@ public class Enemy extends Creature{
             return;
         }
 
+
+
         attackTimer = 0;
 
-        if(handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
-            handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-            return;
-        }
+//        if(handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
+//            handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
+//            return;
+//        }
 
+        if(checkAttackZone()){
+            handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
+        }
     }
 
     protected boolean checkPlayerZone() {
-        boolean collisionDetected = false;
-        Shape intersect = Shape.intersect(this.zone, handler.getWorld().getEntityManager().getPlayer().zone);
-        if (intersect.getBoundsInLocal().getWidth() != -1) {
-            collisionDetected = true;
-        }
-        return collisionDetected;
+        enemyX = getCollisionBounds(0,0).getX();
+        enemyY = getCollisionBounds(0,0).getY();
+        playerX = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getX();
+        playerY = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getY();
+        distance = (enemyX - playerX)*(enemyX - playerX) + (enemyY - playerY)*(enemyY - playerY);
+        return distance < 200*200;
+    }
+
+    protected boolean checkAttackZone() {
+        enemyX = getCollisionBounds(0,0).getX();
+        enemyY = getCollisionBounds(0,0).getY();
+        playerX = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getX();
+        playerY = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getY();
+        distance = (enemyX - playerX)*(enemyX - playerX) + (enemyY - playerY)*(enemyY - playerY);
+        return distance < 35*35;
     }
 
 
@@ -91,7 +102,6 @@ public class Enemy extends Creature{
         yMove = 0;
 
         if(checkPlayerZone()){
-//            fightingSound.play();
             if(y > handler.getWorld().getEntityManager().getPlayer().getY() + 1){ //up
                 direction = 1;
                 yMove = -speed;
@@ -107,18 +117,8 @@ public class Enemy extends Creature{
             if(x > handler.getWorld().getEntityManager().getPlayer().getX() + 1){ //left
                 direction = 4;
                 xMove = -speed;
-            } else {
-                return;
             }
         }
-    }
-
-
-    @Override
-    public void render(GraphicsContext g) {
-        zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
-
-
     }
 
     @Override

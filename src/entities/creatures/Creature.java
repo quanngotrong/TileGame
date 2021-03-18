@@ -11,6 +11,8 @@ public abstract class Creature extends Entity {
     protected float xMove, yMove;
     protected int direction = 0; //1-up, 2-down, 3-left, 4-right
     protected int damage;
+    int arSize = 20;
+
 
     public Creature(Handler handler, Image image, float x, float y, int width, int height, int damage){
         super(handler, image, x, y, width, height);

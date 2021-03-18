@@ -40,8 +40,6 @@ public class Skeleton extends Enemy{
         bounds.setWidth(16);
         bounds.setHeight(24);
 
-        zone.setCenterX(-70);
-        zone.setCenterY(-53);
     }
 
     @Override
@@ -72,23 +70,21 @@ public class Skeleton extends Enemy{
 
     @Override
     public void render(GraphicsContext g) {
-        super.render(g);
-        if(xMove != 0 || yMove != 0)
+        if (xMove != 0 || yMove != 0)
             animation.play();
         else animation.stop();
 
         enemy = imageView.snapshot(params, null);
-        g.drawImage(enemy, (int)(x - handler.getGameCamera().getxOffset()),
+        g.drawImage(enemy, (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
 
         //draw health bar
         g.setFill(Color.BLACK);
-        g.strokeRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
-                (int) (y - handler.getGameCamera().getyOffset()),40,5);
+        g.strokeRect((int) (x - handler.getGameCamera().getxOffset()) + 11,
+                (int) (y - handler.getGameCamera().getyOffset()), 40, 5);
         g.setFill(Color.GREEN);
-        g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
-                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) /(float) maxHealth), 4);
+        g.fillRect((int) (x - handler.getGameCamera().getxOffset()) + 11,
+                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) / (float) maxHealth), 4);
 
     }
-
 }

@@ -15,6 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import settings.Settings;
 import states.GameState;
+import states.MenuState;
 import states.State;
 
 public class Player extends Creature{
@@ -29,6 +30,7 @@ public class Player extends Creature{
     SpriteAnimation animation;
     Image player;
 
+
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
 
@@ -36,7 +38,8 @@ public class Player extends Creature{
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(5);
-//        setHealth(1);
+
+        arSize = 25;
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -49,8 +52,6 @@ public class Player extends Creature{
         bounds.setWidth(16);
         bounds.setHeight(24);
 
-        zone.setCenterX(-70);
-        zone.setCenterY(-53);
 
     }
 
@@ -75,7 +76,6 @@ public class Player extends Creature{
 
         Rectangle cb = getCollisionBounds(0, 0);
         Rectangle ar = new Rectangle();
-        int arSize = 40;
         ar.setWidth(arSize);
         ar.setHeight(arSize);
 
@@ -107,7 +107,6 @@ public class Player extends Creature{
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
                 e.takeDamage(damage);
-                return;
             }
         }
     }
@@ -156,7 +155,7 @@ public class Player extends Creature{
     public void die() {
         System.out.println("Ngu vcl :D");
         handler.getGame().gameState = new GameState(handler);
-        State.setState(handler.getGame().menuState);
+        State.setState(new MenuState(handler));
     }
 
     @Override
@@ -168,7 +167,6 @@ public class Player extends Creature{
         player = imageView.snapshot(params, null);
         g.drawImage(player, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
-        zone.relocate((int)(x + zone.getCenterX() - handler.getGameCamera().getxOffset()), (int) (y + zone.getCenterY() - handler.getGameCamera().getyOffset()));
 
         //draw health bar
         g.setFill(Color.BLACK);
