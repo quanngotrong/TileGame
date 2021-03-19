@@ -7,14 +7,14 @@ import settings.Settings;
 
 public abstract class Creature extends Entity {
 
-    protected float speed;
-    protected float xMove, yMove;
+    protected double speed;
+    protected double xMove, yMove;
     protected int direction = 0; //1-up, 2-down, 3-left, 4-right
     protected int damage;
     int arSize = 20;
 
 
-    public Creature(Handler handler, Image image, float x, float y, int width, int height, int damage){
+    public Creature(Handler handler, Image image, double x, double y, int width, int height, int damage){
         super(handler, image, x, y, width, height);
         this.damage = damage;
         speed = Settings.DEFAULT_SPEED;
@@ -80,27 +80,27 @@ public abstract class Creature extends Entity {
 
     //Getters & Setters
 
-    public float getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(float speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
-    public float getxMove() {
+    public double getxMove() {
         return xMove;
     }
 
-    public void setxMove(float xMove) {
+    public void setxMove(double xMove) {
         this.xMove = xMove;
     }
 
-    public float getyMove() {
+    public double getyMove() {
         return yMove;
     }
 
-    public void setyMove(float yMove) {
+    public void setyMove(double yMove) {
         this.yMove = yMove;
     }
 

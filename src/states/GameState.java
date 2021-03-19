@@ -22,7 +22,8 @@ public class GameState extends State{
         world = new World(handler, "res/worlds/world1.txt");
         handler.setWorld(world);
 
-        stateSound = new MediaPlayer(Sound.main);
+        stateSound = Sound.main;
+        handler.getSoundManager().addSound(stateSound);
         stateSound.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
@@ -38,8 +39,9 @@ public class GameState extends State{
         if(handler.getKeyManager().isPause()){
 
             //Sounds off
-            stateSound.pause();
-            handler.getWorld().getEntityManager().getPlayer().getFootStep().stop();
+            for(MediaPlayer mediaP : handler.getSoundManager().getSoundList()){
+                mediaP.pause();
+            }
 
             //Set pause state
             State.setState(new PauseState(handler));
@@ -54,10 +56,10 @@ public class GameState extends State{
         }
 
         //Sounds off
-        stateSound.pause();
-        handler.getWorld().getEntityManager().getPlayer().getFootStep().stop();
+        handler.getSoundManager().soundOff();
 
         //Set victory state
+        handler.getMouseManager().setUiManager(null);
         State.setState(new VictoryState(handler));
     }
     @Override

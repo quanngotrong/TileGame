@@ -13,7 +13,7 @@ import settings.Settings;
 
 public abstract class Entity {
 
-    protected float x, y;
+    protected double x, y;
     protected int width, height;
     protected Handler handler;
     protected Image image;
@@ -25,7 +25,7 @@ public abstract class Entity {
 
     public Rectangle bounds;
 
-    public Entity(Handler handler, Image image, float x, float y, int width, int height){
+    public Entity(Handler handler, Image image, double x, double y, int width, int height){
         this.handler = handler;
         this.image = image;
 
@@ -59,7 +59,7 @@ public abstract class Entity {
         }
     }
 
-    public boolean checkEntityCollision(float xOffset, float yOffset){
+    public boolean checkEntityCollision(double xOffset, double yOffset){
         for(Entity e : handler.getWorld().getEntityManager().getEntities()){
             if(e.equals(this))
                 continue;
@@ -71,26 +71,26 @@ public abstract class Entity {
     }
 
 
-    public Rectangle getCollisionBounds(float xOffset, float yOffset){
+    public Rectangle getCollisionBounds(double xOffset, double yOffset){
         return new Rectangle((int) (x + bounds.getX() + xOffset),
                         (int) (y + bounds.getY() + yOffset), bounds.getWidth(), bounds.getHeight());
     }
 
     //Getters & Setters
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 

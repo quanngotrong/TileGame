@@ -6,10 +6,10 @@ import settings.Settings;
 
 public class GameCamera {
 
-    private float xOffset, yOffset;
+    private double xOffset, yOffset;
     private Handler handler;
 
-    public GameCamera(Handler handler, float xOffset, float yOffset){
+    public GameCamera(Handler handler, double xOffset, double yOffset){
         this.handler = handler;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
@@ -35,24 +35,24 @@ public class GameCamera {
         checkBlankSpace();
     }
 
-    public void move(float xAmt, float yAmt){
+    public void move(double xAmt, double yAmt){
         xOffset += xAmt;
         yOffset += yAmt;
     }
 
-    public float getxOffset() {
+    public double getxOffset() {
         return xOffset;
     }
 
-    public void setxOffset(float xOffset) {
+    public void setxOffset(double xOffset) {
         this.xOffset = xOffset;
     }
 
-    public float getyOffset() {
+    public double getyOffset() {
         return yOffset;
     }
 
-    public void setyOffset(float yOffset) {
+    public void setyOffset(double yOffset) {
         this.yOffset = yOffset;
     }
 }

@@ -9,10 +9,14 @@ public class UIImageButton extends UIObject{
     private Image image;
     private ClickListener clicker;
 
-    public UIImageButton(float x, float y, int width, int height, Image image, ClickListener clicker) {
+    public UIImageButton(double x, double y, int width, int height, Image image, ClickListener clicker) {
         super(x, y, width, height);
         this.image = image;
         this.clicker = clicker;
+    }
+
+    public void changeImage(Image image){
+        this.image = image;
     }
 
     @Override

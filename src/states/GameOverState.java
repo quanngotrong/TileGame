@@ -4,7 +4,6 @@ import game.Handler;
 import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 import sounds.Sound;
 import ui.UIImageButton;
@@ -19,14 +18,17 @@ public class GameOverState extends State{
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-        stateSound = new MediaPlayer(Sound.gameover);
-        stateSound.play();
+        stateSound = Sound.gameover;
+        handler.getSoundManager().addSound(stateSound);
+        if(!handler.getGame().isMute)
+            stateSound.play();
 
-        uiManager.addObject(new UIImageButton(250, 370,200, 100, Assets.start,
+        uiManager.addObject(new UIImageButton(250, 370,200, 100, Assets.restart,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
+                    handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
-                    stateSound.dispose();
+                    stateSound.stop();
                 }));
 
         uiManager.addObject(new UIImageButton(530, 370,200, 100, Assets.exit, () -> Platform.exit()));

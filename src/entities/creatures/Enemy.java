@@ -3,6 +3,7 @@ package entities.creatures;
 import game.Handler;
 import javafx.scene.image.Image;
 
+
 import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 import sounds.Sound;
@@ -18,7 +19,7 @@ public abstract class Enemy extends Creature{
     //Zone
     double enemyX, enemyY, playerX, playerY, distance;
 
-    public Enemy(Handler handler,  Image image, float x, float y, int damage){
+    public Enemy(Handler handler,  Image image, double x, double y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
         arSize = 20;
 
@@ -45,7 +46,11 @@ public abstract class Enemy extends Creature{
 
         if(checkAttackZone()){
             handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-            new MediaPlayer(Sound.hurt).play();
+            if(!handler.getGame().isMute){
+                if(Sound.hurt.getStatus() == MediaPlayer.Status.PLAYING)
+                    Sound.hurt.stop();
+                Sound.hurt.play();
+            }
         }
     }
 

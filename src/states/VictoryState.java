@@ -4,10 +4,9 @@ import game.Handler;
 import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+
 import settings.Settings;
+
 
 import sounds.Sound;
 import ui.UIImageButton;
@@ -23,11 +22,19 @@ public class VictoryState extends State{
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-        uiManager.addObject(new UIImageButton(150, 430,200, 100, Assets.start,
+        stateSound = Sound.victory;
+        handler.getSoundManager().addSound(stateSound);
+        if(!handler.getGame().isMute)
+            stateSound.play();
+
+
+        uiManager.addObject(new UIImageButton(150, 430,200, 100, Assets.restart,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
+                    stateSound.stop();
+
                 }));
 
         uiManager.addObject(new UIImageButton(450, 430,200, 100, Assets.exit, () -> Platform.exit()));

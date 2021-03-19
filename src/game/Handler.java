@@ -5,6 +5,7 @@ import input.KeyManager;
 import input.MouseManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
+import sounds.SoundManager;
 import worlds.World;
 
 public class Handler {
@@ -54,5 +55,9 @@ public class Handler {
 
     public int getHeight(){
         return game.getHeight();
+    }
+
+    public SoundManager getSoundManager(){
+        return game.getSoundManager();
     }
 }

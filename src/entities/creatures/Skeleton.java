@@ -22,7 +22,7 @@ public class Skeleton extends Enemy{
     SpriteAnimation animation;
     Image enemy;
 
-    public Skeleton(Handler handler,  Image image, float x, float y, int damage){
+    public Skeleton(Handler handler,  Image image, double x, double y, int damage){
         super(handler, image, x, y, damage);
 
         setWidth(64);
@@ -84,7 +84,7 @@ public class Skeleton extends Enemy{
                 (int) (y - handler.getGameCamera().getyOffset()), 40, 5);
         g.setFill(Color.GREEN);
         g.fillRect((int) (x - handler.getGameCamera().getxOffset()) + 11,
-                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) / (float) maxHealth), 4);
+                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((double) (health) / (double) maxHealth), 4);
 
     }
 }

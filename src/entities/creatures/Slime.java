@@ -12,7 +12,7 @@ public class Slime extends Enemy{
     private ImageAnimation slimeUp, slimeDown, slimeLeft, slimeRight;
 
 
-    public Slime(Handler handler, Image image, float x, float y, int damage) {
+    public Slime(Handler handler, Image image, double x, double y, int damage) {
         super(handler, image, x, y, damage);
 
         setWidth(32);
@@ -53,7 +53,7 @@ public class Slime extends Enemy{
                 (int) (y - handler.getGameCamera().getyOffset() - 5),40,5);
         g.setFill(Color.GREEN);
         g.fillRect((int)(x - handler.getGameCamera().getxOffset() - 4),
-                (int) (y - handler.getGameCamera().getyOffset() - 5), 40 * ((float) (health) /(float) maxHealth), 4);
+                (int) (y - handler.getGameCamera().getyOffset() - 5), 40 * ((double) (health) /(double) maxHealth), 4);
     }
 
     private Image getCurrentAnimationFrame(){

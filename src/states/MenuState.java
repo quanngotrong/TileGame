@@ -20,7 +20,9 @@ public class MenuState extends State{
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-        stateSound = new MediaPlayer(Sound.uchiha);
+        stateSound = Sound.uchiha;
+        handler.getSoundManager().addSound(stateSound);
+
         stateSound.play();
 
         uiManager.addObject(new UIImageButton(300, 130,200, 100, Assets.start,

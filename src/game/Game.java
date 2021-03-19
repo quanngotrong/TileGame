@@ -14,8 +14,10 @@ import javafx.scene.layout.StackPane;
 
 import javafx.stage.Stage;
 import settings.Settings;
+import sounds.SoundManager;
 import states.GameState;
 import states.MenuState;
+import states.PauseState;
 import states.State;
 
 import java.io.File;
@@ -32,6 +34,7 @@ public class Game extends Application {
     //States
     public State gameState;
     public State menuState;
+    public State pauseState;
     //Input
     private KeyManager keyManager;
     private MouseManager mouseManager;
@@ -39,6 +42,11 @@ public class Game extends Application {
     private GameCamera gameCamera;
     //Handler
     private Handler handler;
+
+    //Sound
+    private SoundManager soundManager;
+    public boolean isMute = false;
+
 
     public void init(){
         Assets.init();
@@ -52,7 +60,6 @@ public class Game extends Application {
         g = canvas.getGraphicsContext2D();
 
         scene = new Scene(root, width, height);
-
         stage.setScene(scene);
         stage.setTitle("Tile Game");
         stage.setResizable(false);
@@ -65,8 +72,12 @@ public class Game extends Application {
         mouseManager = new MouseManager(scene);
         mouseManager.addListener();
 
+        //Sounds
+        soundManager = new SoundManager(handler);
+
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
+
         State.setState(menuState);
 
         gameCamera = new GameCamera(handler,0,0);
@@ -135,6 +146,10 @@ public class Game extends Application {
 
     public GameCamera getGameCamera() {
         return gameCamera;
+    }
+
+    public SoundManager getSoundManager() {
+        return soundManager;
     }
 
     public static void main(String[] args) {

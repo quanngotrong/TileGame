@@ -13,6 +13,8 @@ import settings.Settings;
 import tiles.Tile;
 import utils.Utils;
 
+import java.util.Random;
+
 public class World {
 
     private int width, height;
@@ -30,17 +32,22 @@ public class World {
         this.handler = handler;
         entityManager = new EntityManager(handler, new Player(handler, Assets.skeleton, 100, 100, 20));
         for(int i = 0; i < 6; i++){
-            entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 55));
-            entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 140));
-//            entityManager.addEntity(new Skeleton(handler, Assets.skeleton, 100, 200 + 50*i, 10));
+            entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 50));
+            entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 130));
         }
 
         for(int i = 0; i < 4; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
-//            entityManager.addEntity(new Slime(handler, Assets.skeleton, 200 + 50*i, 400, 15));
         }
-        slime = new Slime(handler, Assets.skeleton, 200, 400, 15);
-        entityManager.addEntity(slime);
+
+        for(int i = 0; i < 1; i++){
+            entityManager.addEntity(new Slime(handler, Assets.skeleton,
+                    Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 15));
+            entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
+                    Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 10));
+
+        }
+
 
         loadWorld(path);
 

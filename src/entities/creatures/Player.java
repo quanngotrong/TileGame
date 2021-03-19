@@ -16,7 +16,6 @@ import javafx.util.Duration;
 import settings.Settings;
 import sounds.Sound;
 import states.GameOverState;
-import states.GameState;
 import states.State;
 
 public class Player extends Creature{
@@ -36,7 +35,7 @@ public class Player extends Creature{
     private long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
     private MediaPlayer footstep;
 
-    public Player(Handler handler, Image image, float x, float y, int damage){
+    public Player(Handler handler, Image image, double x, double y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(5);
@@ -54,7 +53,8 @@ public class Player extends Creature{
         bounds.setWidth(16);
         bounds.setHeight(24);
 
-        footstep = new MediaPlayer(Sound.footstep);
+        footstep = Sound.footstep;
+        handler.getSoundManager().addSound(footstep);
 
     }
 
@@ -166,11 +166,9 @@ public class Player extends Creature{
         active = false;
 
         //Sound off
-        footstep.stop();
-        handler.getGame().gameState.stateSound.stop();
+        handler.getSoundManager().soundOff();
 
         //New game
-        handler.getGame().gameState = new GameState(handler);
         State.setState(new GameOverState(handler));
     }
 
@@ -190,10 +188,7 @@ public class Player extends Creature{
                 (int) (y - handler.getGameCamera().getyOffset()),40,5);
         g.setFill(Color.GREEN);
         g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
-                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) /(float) maxHealth), 4);
+                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((double) (health) /(double) maxHealth), 4);
     }
 
-    public MediaPlayer getFootStep(){
-        return footstep;
-    }
 }

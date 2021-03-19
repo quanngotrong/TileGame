@@ -7,7 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 
-import sounds.Sound;
 import ui.UIImageButton;
 import ui.UIManager;
 
@@ -26,7 +25,20 @@ public class PauseState extends State{
                     State.setState(handler.getGame().gameState);
                 }));
 
-        uiManager.addObject(new UIImageButton(300, 260,200, 100, Assets.exit, () -> Platform.exit()));
+
+        uiManager.addObject(new UIImageButton(300, 260,200, 100, Assets.exit, Platform::exit));
+
+        uiManager.addObject(new UIImageButton(300, 330,200, 200, Assets.mute_unmute,
+                () -> {
+                    if(!handler.getGame().isMute) {
+                        handler.getSoundManager().muteAll();
+                        handler.getGame().isMute = true;
+                    } else {
+                        handler.getSoundManager().unMuteAll();
+                        handler.getGame().isMute = false;
+                    }
+                }));
+
     }
 
     @Override

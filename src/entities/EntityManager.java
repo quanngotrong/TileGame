@@ -14,7 +14,7 @@ public class EntityManager{
     private Player player;
     private ArrayList<Entity> entities;
     private Iterator i;
-    private Comparator<Entity> renderSort = (a,b) -> Float.compare(a.getY() + a.getHeight() , b.getY() + b.getHeight());
+    private Comparator<Entity> renderSort = (a,b) -> Double.compare(a.getY() + a.getHeight() , b.getY() + b.getHeight());
     public EntityManager(Handler handler, Player player){
         this.handler = handler;
         this.player = player;

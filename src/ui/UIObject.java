@@ -6,12 +6,12 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class UIObject {
 
-    protected float x, y;
+    protected double x, y;
     protected int width, height;
     protected Rectangle bounds;
     protected boolean hovering = false;
 
-    public UIObject(float x, float y, int width, int height) {
+    public UIObject(double x, double y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -39,19 +39,19 @@ public abstract class UIObject {
 
 
     //Getters & Setters
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
