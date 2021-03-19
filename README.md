@@ -12,6 +12,35 @@ Nếu chưa tải Java 15 hay JavaFX thì tải về nhé
 Tải xong thì vào Project Structure add cái JavaFX vào Project Libraries là oke.
 
 
-Starting Scene:
+Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P thì sẽ chuyển sang Pause State. Trong Game State có Player và Enemy, Player hiện chỉ có thể Attack bằng phím Space. Nếu Player đánh hết Enemy thì chuyển sang Victory State, nếu Player bị chết thì chuyển sang Game Over State.
 
-![image](https://user-images.githubusercontent.com/38860847/111751347-f75e8100-88c6-11eb-8e1a-d378a1ab055c.png)
+
+Demo là như vậy, ý tưởng phát triển thêm: 
+
++, Thêm khả năng bắn đạn (cho Player và Enemy), với Player thì cần thêm Energy. Ý tưởng thiết kế đạn thì Class Bullets sẽ extends Class Creature, mỗi khi nhấn phím Ctrl sẽ tùy theo direction của Player mà set xMove, yMove,... Đạn có thể thêm vào ArrayList entitiesManager đã có, hoặc thêm vào ArrayList mới, tùy theo cái nào làm được thì làm. Đạn cũng sẽ có bounds để check Collision Bounds với Enemy, nếu Intersect thì remove đạn khỏi ArrayList và takeDamage cho Enemy.
+
++, Thêm điểm số, hoặc nếu phát triển theo hướng Survival thì cần thêm số quái giết được, bộ đếm thời gian, cứ tới mỗi mốc thì sẽ spawn ra Enemy. 
+
++, Enemy thay vì đứng im, chờ Player đi vào zone thì có thể đi Random hướng để đi lung tung.
+
++, Sửa lại Buttons các State, Pause State thì thêm tắt âm lượng, thêm quay về Main Menu.
+
++, Thêm các State tương ứng với mức Easy, Medium, Hard, thêm các World mới. Về World có thể sử dụng Tiled (https://www.mapeditor.org/) để thiết kế cho đẹp.
+
++, Thêm Story Scene, NPC Dialogue, tạo cốt truyện cho Game, cái này chắc hơi thừa, rảnh thì làm quá.
+
+Starting Scene:
+![image](https://user-images.githubusercontent.com/38860847/111766841-90e25e80-88d8-11eb-8212-2b308d6b484b.png)
+
+Game State:
+![image](https://user-images.githubusercontent.com/38860847/111766888-a2c40180-88d8-11eb-99b6-9af9df61d6ca.png)
+
+Victory State:
+![image](https://user-images.githubusercontent.com/38860847/111766943-b4a5a480-88d8-11eb-9719-908d5190a863.png)
+
+Pause State:
+![image](https://user-images.githubusercontent.com/38860847/111767002-c5561a80-88d8-11eb-888b-a062c8502953.png)
+
+Game Over State:
+![image](https://user-images.githubusercontent.com/38860847/111767060-d7d05400-88d8-11eb-8965-437763b0d228.png)
+
