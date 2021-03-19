@@ -27,8 +27,6 @@ Demo là như vậy, ý tưởng phát triển thêm:
 
 +, Enemy thay vì đứng im, chờ Player đi vào zone rồi mới đuổi theo Player thì có thể đi Random hướng để đi lung tung.
 
-+, Sửa lại Buttons các State, Pause State thì thêm tắt âm lượng, thêm quay về Main Menu.
-
 +, Thêm các State tương ứng với mức Easy, Medium, Hard, thêm các World mới. Về World có thể sử dụng Tiled (https://www.mapeditor.org/) để thiết kế cho đẹp.
 
 +, Thêm Story Scene, NPC Dialogue, tạo cốt truyện cho Game, cái này chắc hơi thừa, rảnh thì làm quá.
