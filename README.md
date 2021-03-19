@@ -9,7 +9,11 @@ Nếu chưa tải Java 15 hay JavaFX thì tải về nhé
 
 Ủa cái JavaFX SDK chả hiểu sao không thấy bản 15, thử tải bản LTS 11.0.2 xem có được không.
 
-Tải xong thì vào Project Structure add cái JavaFX vào Project Libraries là oke.
+Tải xong thì add cái Library vào Project Libraries là oke.
+
+IntelliJ thì như này: https://www.jetbrains.com/help/idea/javafx.html#add-javafx-lib
+
+Eclipse chắc cũng tương tự.
 
 
 Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P thì sẽ chuyển sang Pause State. Trong Game State có Player và Enemy, Player hiện chỉ có thể Attack bằng phím Space. Nếu Player đánh hết Enemy thì chuyển sang Victory State, nếu Player bị chết thì chuyển sang Game Over State.
