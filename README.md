@@ -21,7 +21,7 @@ Demo là như vậy, ý tưởng phát triển thêm:
 
 +, Thêm điểm số, hoặc nếu phát triển theo hướng Survival thì cần thêm số quái giết được, bộ đếm thời gian, cứ tới mỗi mốc thì sẽ spawn ra Enemy. 
 
-+, Enemy thay vì đứng im, chờ Player đi vào zone thì có thể đi Random hướng để đi lung tung.
++, Enemy thay vì đứng im, chờ Player đi vào zone rồi mới đuổi theo Player thì có thể đi Random hướng để đi lung tung.
 
 +, Sửa lại Buttons các State, Pause State thì thêm tắt âm lượng, thêm quay về Main Menu.
 
