@@ -15,11 +15,3 @@ Tải xong thì vào Project Structure add cái JavaFX vào Project Libraries l�
 Starting Scene:
 
 ![image](https://user-images.githubusercontent.com/38860847/111751347-f75e8100-88c6-11eb-8e1a-d378a1ab055c.png)
-
-Ingame:
-
-![image](https://user-images.githubusercontent.com/38860847/111751440-16f5a980-88c7-11eb-8eab-0ac6c4c84f85.png)
-
-Gameover:
-
-![image](https://user-images.githubusercontent.com/38860847/111751474-22e16b80-88c7-11eb-82b9-6703308dd391.png)
