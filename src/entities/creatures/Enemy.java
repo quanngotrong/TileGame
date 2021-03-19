@@ -3,9 +3,9 @@ package entities.creatures;
 import game.Handler;
 import javafx.scene.image.Image;
 
-import javafx.scene.shape.Rectangle;
+import javafx.scene.media.MediaPlayer;
 import settings.Settings;
-
+import sounds.Sound;
 
 
 public abstract class Enemy extends Creature{
@@ -41,39 +41,11 @@ public abstract class Enemy extends Creature{
             return;
         }
 
-        Rectangle cb = getCollisionBounds(0, 0);
-        Rectangle ar = new Rectangle();
-
-        ar.setWidth(arSize);
-        ar.setHeight(arSize);
-
-        if(direction == 1){
-            ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
-            ar.setY(cb.getY() - arSize);
-        } else if(direction == 2){
-            ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
-            ar.setY(cb.getY() + cb.getHeight());
-        } else if(direction == 3){
-            ar.setX(cb.getX() - arSize);
-            ar.setY(cb.getY() + cb.getHeight()/2 - arSize/2);
-        } else if(direction == 4){
-            ar.setX(cb.getX() + cb.getWidth());
-            ar.setY(cb.getY() + cb.getHeight()/2 - arSize/2);
-        } else {
-            return;
-        }
-
-
-
         attackTimer = 0;
-
-//        if(handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
-//            handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-//            return;
-//        }
 
         if(checkAttackZone()){
             handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
+            new MediaPlayer(Sound.hurt).play();
         }
     }
 

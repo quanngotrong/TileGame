@@ -37,7 +37,11 @@ public class KeyManager {
     public boolean isMoveRight(){
         return keys.getOrDefault(KeyCode.RIGHT, false);
     }
-    public boolean isSpace() {
+    public boolean isSpace(){
         return keys.getOrDefault(KeyCode.SPACE, false);
     }
+    public boolean isPause(){
+        return keys.getOrDefault(KeyCode.P, false);
+    }
+
 }

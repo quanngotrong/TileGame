@@ -32,17 +32,14 @@ public class World {
         for(int i = 0; i < 6; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 55));
             entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 140));
+            entityManager.addEntity(new Skeleton(handler, Assets.skeleton, 100, 200 + 50*i, 10));
         }
 
         for(int i = 0; i < 4; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
+            entityManager.addEntity(new Slime(handler, Assets.skeleton, 200 + 50*i, 400, 15));
         }
 
-        skeleton = new Skeleton(handler, Assets.skeleton, 100, 200, 10);
-        entityManager.addEntity(skeleton);
-
-        slime = new Slime(handler, Assets.skeleton, 200, 400, 15);
-        entityManager.addEntity(slime);
         loadWorld(path);
 
     }

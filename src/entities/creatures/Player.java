@@ -2,7 +2,7 @@ package entities.creatures;
 
 import entities.Entity;
 import game.Handler;
-import gfx.Assets;
+
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import settings.Settings;
+import sounds.Sound;
+import states.GameOverState;
 import states.GameState;
 import states.MenuState;
 import states.State;
@@ -33,13 +35,14 @@ public class Player extends Creature{
 
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
+    private MediaPlayer footstep;
 
     public Player(Handler handler, Image image, float x, float y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(5);
 
-        arSize = 25;
+        arSize = 30;
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -52,6 +55,7 @@ public class Player extends Creature{
         bounds.setWidth(16);
         bounds.setHeight(24);
 
+        footstep = new MediaPlayer(Sound.footstep);
 
     }
 
@@ -60,10 +64,13 @@ public class Player extends Creature{
         //Movement
         getInput();
         move();
+        stepSound();
         handler.getGameCamera().centerOnEntity(this);
+
+
         //Attack
         checkAttacks();
-        stepSound();
+
 
     }
 
@@ -137,25 +144,35 @@ public class Player extends Creature{
             direction = 4;
             xMove = speed;
             animation.setOffsetY(192);
-
         }
     }
 
     public void stepSound(){
-        if(handler.getKeyManager().isMoveUp() || handler.getKeyManager().isMoveDown()
-            ||handler.getKeyManager().isMoveLeft() || handler.getKeyManager().isMoveRight()){
-            Assets.foot_step.setCycleCount(MediaPlayer.INDEFINITE);
-            Assets.foot_step.play();
-        } else {
-            Assets.foot_step.stop();
+        if(active){
+            if(handler.getKeyManager().isMoveUp() || handler.getKeyManager().isMoveDown()
+                    || handler.getKeyManager().isMoveLeft() || handler.getKeyManager().isMoveRight()){
+                footstep.setCycleCount(MediaPlayer.INDEFINITE);
+                footstep.play();
+            } else {
+                footstep.stop();
+            }
         }
     }
 
     @Override
     public void die() {
-        System.out.println("Ngu vcl :D");
+        System.out.println("Chết dồi :D");
+
+        //Set active
+        active = false;
+
+        //Sound off
+        footstep.stop();
+        handler.getGame().gameState.stateSound.stop();
+
+        //New game
         handler.getGame().gameState = new GameState(handler);
-        State.setState(new MenuState(handler));
+        State.setState(new GameOverState(handler));
     }
 
     @Override
@@ -175,5 +192,9 @@ public class Player extends Creature{
         g.setFill(Color.GREEN);
         g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
                 (int) (y - handler.getGameCamera().getyOffset()), 40 * ((float) (health) /(float) maxHealth), 4);
+    }
+
+    public MediaPlayer getFootStep(){
+        return footstep;
     }
 }

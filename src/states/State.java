@@ -1,7 +1,9 @@
 package states;
 
 import game.Handler;
+import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 
 public abstract class State {
 
@@ -13,6 +15,7 @@ public abstract class State {
     public static State getState(){
         return currentState;
     }
+    public MediaPlayer stateSound;
 
     //Class
 
