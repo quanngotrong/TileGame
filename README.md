@@ -12,6 +12,14 @@ Nếu chưa tải Java 15 hay JavaFX thì tải về nhé
 Tải xong thì vào Project Structure add cái JavaFX vào Project Libraries là oke.
 
 
-![image](https://user-images.githubusercontent.com/38860847/111503396-4bf3e600-8779-11eb-9114-1bc77c9e2c6c.png)
+Starting Scene:
 
+![image](https://user-images.githubusercontent.com/38860847/111751347-f75e8100-88c6-11eb-8e1a-d378a1ab055c.png)
 
+Ingame:
+
+![image](https://user-images.githubusercontent.com/38860847/111751440-16f5a980-88c7-11eb-8eab-0ac6c4c84f85.png)
+
+Gameover:
+
+![image](https://user-images.githubusercontent.com/38860847/111751474-22e16b80-88c7-11eb-82b9-6703308dd391.png)
