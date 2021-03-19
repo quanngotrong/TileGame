@@ -75,9 +75,7 @@ public class Game extends Application {
         //Sounds
         soundManager = new SoundManager(handler);
 
-        gameState = new GameState(handler);
         menuState = new MenuState(handler);
-
         State.setState(menuState);
 
         gameCamera = new GameCamera(handler,0,0);

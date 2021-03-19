@@ -40,7 +40,7 @@ public class World {
             entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
         }
 
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < 10; i++){
             entityManager.addEntity(new Slime(handler, Assets.skeleton,
                     Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 15));
             entityManager.addEntity(new Skeleton(handler, Assets.skeleton,

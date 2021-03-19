@@ -19,16 +19,23 @@ public class PauseState extends State{
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-        uiManager.addObject(new UIImageButton(300, 130,200, 100, Assets.start,
+        uiManager.addObject(new UIImageButton(320, 120,180, 90, Assets.start,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     State.setState(handler.getGame().gameState);
                 }));
 
+        uiManager.addObject(new UIImageButton(320, 220,180, 90, Assets.main_menu,
+                () -> {
+                    handler.getMouseManager().setUiManager(null);
+                    handler.getGame().menuState = new MenuState(handler);
+                    State.setState(handler.getGame().menuState);
+                }));
 
-        uiManager.addObject(new UIImageButton(300, 260,200, 100, Assets.exit, Platform::exit));
 
-        uiManager.addObject(new UIImageButton(300, 330,200, 200, Assets.mute_unmute,
+        uiManager.addObject(new UIImageButton(320, 320,180, 90, Assets.exit, Platform::exit));
+
+        uiManager.addObject(new UIImageButton(320, 400,180, 120, Assets.mute_unmute,
                 () -> {
                     if(!handler.getGame().isMute) {
                         handler.getSoundManager().muteAll();

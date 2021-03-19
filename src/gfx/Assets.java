@@ -8,7 +8,7 @@ public class Assets {
     public static Image tree1, tree12, dirt, grass, stone, skeleton, player;
 //    public static Image[] btn_start;
     public static Image background, gameover, pause, victory;
-    public static Image start, exit, mute_unmute, restart;
+    public static Image start, exit, mute_unmute, restart, main_menu;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
 
     public static void init(){
@@ -27,6 +27,7 @@ public class Assets {
         exit = ImageLoader.loadImage("res/textures/exit_button.png");
         mute_unmute = ImageLoader.loadImage("res/textures/mute_unmute.png");
         restart = ImageLoader.loadImage("res/textures/restart.png");
+        main_menu = ImageLoader.loadImage("res/textures/main_menu.png");
 
         background = ImageLoader.loadImage("res/textures/background.jpg");
         gameover = ImageLoader.loadImage("res/textures/gameover.jpg");
