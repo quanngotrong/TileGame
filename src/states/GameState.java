@@ -1,5 +1,7 @@
 package states;
 
+import entities.Entity;
+import entities.creatures.Enemy;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
@@ -28,10 +30,11 @@ public class GameState extends State{
     public void tick() {
         stateSound.play();
         world.tick();
-        pauseState();
+        checkPause();
+        checkWin();
     }
 
-    public void pauseState(){
+    public void checkPause(){
         if(handler.getKeyManager().isPause()){
 
             //Sounds off
@@ -41,6 +44,21 @@ public class GameState extends State{
             //Set pause state
             State.setState(new PauseState(handler));
         }
+    }
+
+    public void checkWin(){
+        for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+            if(e instanceof Enemy){
+                return;
+            }
+        }
+
+        //Sounds off
+        stateSound.pause();
+        handler.getWorld().getEntityManager().getPlayer().getFootStep().stop();
+
+        //Set victory state
+        State.setState(new VictoryState(handler));
     }
     @Override
     public void render(GraphicsContext g) {

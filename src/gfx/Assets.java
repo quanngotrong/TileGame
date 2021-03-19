@@ -7,7 +7,7 @@ public class Assets {
     private static final int width = 32, height = 32;
     public static Image tree1, tree12, dirt, grass, stone, skeleton, player;
 //    public static Image[] btn_start;
-    public static Image background, gameover, pause;
+    public static Image background, gameover, pause, victory;
     public static Image start, exit;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
 
@@ -28,6 +28,7 @@ public class Assets {
         background = ImageLoader.loadImage("res/textures/background.jpg");
         gameover = ImageLoader.loadImage("res/textures/gameover.jpg");
         pause = ImageLoader.loadImage("res/textures/pause.jpg");
+        victory = ImageLoader.loadImage("res/textures/victory.jpg");
 
         slime_up = new Image[4];
         for(int i = 0; i < 4; i++)

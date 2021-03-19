@@ -17,7 +17,6 @@ import settings.Settings;
 import sounds.Sound;
 import states.GameOverState;
 import states.GameState;
-import states.MenuState;
 import states.State;
 
 public class Player extends Creature{
