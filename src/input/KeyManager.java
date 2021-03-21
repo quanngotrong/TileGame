@@ -43,8 +43,11 @@ public class KeyManager {
     public boolean isPause(){
         return keys.getOrDefault(KeyCode.P, false);
     }
-    public boolean isCtrl(){
-        return keys.getOrDefault(KeyCode.CONTROL, false);
+    public boolean isSpell(){
+        return keys.getOrDefault(KeyCode.Q, false);
+    }
+    public boolean isDestroyThemAll(){
+        return keys.getOrDefault(KeyCode.CONTROL, false) && keys.getOrDefault(KeyCode.TAB, false);
     }
 
 }

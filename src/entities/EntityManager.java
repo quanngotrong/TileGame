@@ -16,7 +16,7 @@ public class EntityManager{
     private ArrayList<Entity> entities;
     private ArrayList<Bullet> bullets;
     private Iterator i, j;
-    private Comparator<Entity> renderSort = (a,b) -> Double.compare(a.getY() + a.getHeight() , b.getY() + b.getHeight());
+    private Comparator<Entity> renderSort = Comparator.comparingDouble(a -> a.getY() + a.getHeight());
 
     public EntityManager(Handler handler, Player player){
         this.handler = handler;

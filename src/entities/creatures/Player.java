@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import settings.Settings;
@@ -35,14 +34,14 @@ public class Player extends Creature{
 
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
+    public static long lastSpellTimer, spellCoolDown = 2000, spellTimer = spellCoolDown;
+
     private MediaPlayer footstep;
-    protected int ammo = 10;
 
     public Player(Handler handler, Image image, double x, double y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(5);
-
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -71,7 +70,38 @@ public class Player extends Creature{
 
         //Attack
         checkAttacks();
+        checkSpells();
 
+    }
+
+    private void checkSpells(){
+        spellTimer += System.currentTimeMillis() - lastSpellTimer;
+        lastSpellTimer = System.currentTimeMillis();
+        if(spellTimer < spellCoolDown){
+            return;
+        }
+
+        if(handler.getKeyManager().isDestroyThemAll()){
+            for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+                if (e instanceof Enemy){
+                    e.takeDamage(1000);
+                }
+            }
+        }
+
+        if(handler.getKeyManager().isSpell()){
+            handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_bullet,
+                    x + 22, y + 35, Settings.PLAYER_BULLET_DAMAGE, direction));
+            if(!Settings.IS_MUTE){
+                if(Sound.player_fired.getStatus() == MediaPlayer.Status.PLAYING)
+                    Sound.player_fired.stop();
+                Sound.player_fired.play();
+            }
+        } else {
+            return;
+        }
+
+        spellTimer = 0;
 
     }
 
@@ -89,17 +119,7 @@ public class Player extends Creature{
         ar.setWidth(arSize);
         ar.setHeight(arSize);
 
-        if(handler.getKeyManager().isCtrl() && ammo > 0){
-            handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_bullet,
-                    x + 22, y + 35, Settings.PLAYER_BULLET_DAMAGE, direction));
-            ammo--;
-            if(!Settings.IS_MUTE){
-                if(Sound.player_fired.getStatus() == MediaPlayer.Status.PLAYING)
-                    Sound.player_fired.stop();
-                Sound.player_fired.play();
-            }
-
-        } else if(handler.getKeyManager().isSpace() && direction == 1){
+        if(handler.getKeyManager().isSpace() && direction == 1){
             ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
             ar.setY(cb.getY() - arSize);
         } else if(handler.getKeyManager().isSpace() && direction == 2){
@@ -206,16 +226,6 @@ public class Player extends Creature{
         g.drawImage(player, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
 
-        //draw health bar
-        g.setFill(Color.BLACK);
-        g.strokeRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
-                (int) (y - handler.getGameCamera().getyOffset()),40,5);
-        g.setFill(Color.GREEN);
-        g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
-                (int) (y - handler.getGameCamera().getyOffset()), 40 * ((double) (health) /(double) maxHealth), 4);
     }
 
-    public int getAmmo() {
-        return ammo;
-    }
 }

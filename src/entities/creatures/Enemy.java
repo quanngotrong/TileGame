@@ -7,9 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 import sounds.Sound;
-import states.State;
-
-import java.util.Set;
 
 
 public abstract class Enemy extends Creature{
@@ -106,6 +103,7 @@ public abstract class Enemy extends Creature{
     @Override
     public void die() {
         Settings.SCORES++;
+        handler.getWorld().setEnemyOnBoard(handler.getWorld().getEnemyOnBoard() - 1);
         System.out.println(Settings.SCORES);
         System.out.println("xin lũiiii mà :(");
     }

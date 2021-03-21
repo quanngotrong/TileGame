@@ -114,6 +114,10 @@ public abstract class Entity {
         return health;
     }
 
+    public int getMaxHealth(){
+        return maxHealth;
+    }
+
     public void setHealth(int health) {
         this.health = health;
         this.maxHealth = health;

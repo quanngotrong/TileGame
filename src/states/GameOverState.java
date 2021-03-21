@@ -31,7 +31,7 @@ public class GameOverState extends State{
                     stateSound.stop();
                 }));
 
-        uiManager.addObject(new UIImageButton(530, 370,200, 100, Assets.exit, () -> Platform.exit()));
+        uiManager.addObject(new UIImageButton(530, 370,200, 100, Assets.exit, Platform::exit));
     }
 
     @Override

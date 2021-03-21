@@ -15,12 +15,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import settings.Settings;
 import sounds.SoundManager;
-import states.GameState;
 import states.MenuState;
-import states.PauseState;
+
 import states.State;
 
-import java.io.File;
 
 public class Game extends Application {
 

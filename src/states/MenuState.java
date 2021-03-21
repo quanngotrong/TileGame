@@ -4,7 +4,6 @@ import game.Handler;
 import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 
 import sounds.Sound;
@@ -33,7 +32,7 @@ public class MenuState extends State{
                     stateSound.dispose();
                 }));
 
-        uiManager.addObject(new UIImageButton(300, 260,200, 100, Assets.exit, () -> Platform.exit()));
+        uiManager.addObject(new UIImageButton(300, 260,200, 100, Assets.exit, Platform::exit));
     }
 
     @Override

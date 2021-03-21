@@ -1,7 +1,6 @@
 package worlds;
 
 import entities.EntityManager;
-import entities.creatures.Enemy;
 import entities.creatures.Player;
 import entities.creatures.Skeleton;
 import entities.creatures.Slime;
@@ -12,7 +11,6 @@ import javafx.scene.canvas.GraphicsContext;
 import settings.Settings;
 import tiles.Tile;
 import utils.Utils;
-
 
 
 public class World {
@@ -26,27 +24,20 @@ public class World {
     private EntityManager entityManager;
 
     private Handler handler;
+    private long lastSpawnTimer, spawnCoolDown = 500, spawnTimer = spawnCoolDown;
+    private int enemyOnBoard = 0;
 
     public World(Handler handler, String path){
         this.handler = handler;
-        entityManager = new EntityManager(handler, new Player(handler, Assets.skeleton, 100, 100, 20));
+        entityManager = new EntityManager(handler, new Player(handler, Assets.skeleton, 100, 100, 25));
         for(int i = 0; i < 6; i++){
             entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 50));
             entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 130));
         }
 
-        for(int i = 0; i < 4; i++){
-            entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100*i, 800));
+        for(int i = 0; i < 4; i++) {
+            entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100 * i, 800));
         }
-
-        for(int i = 0; i < 10; i++){
-            entityManager.addEntity(new Slime(handler, Assets.skeleton,
-                    Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 15));
-            entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
-                    Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 10));
-
-        }
-
 
         loadWorld(path);
 
@@ -55,6 +46,30 @@ public class World {
 
     public void tick() {
         entityManager.tick();
+        spawnEnemy();
+    }
+
+    public void spawnEnemy(){
+        if(enemyOnBoard < 100){
+            spawnTimer += System.currentTimeMillis() - lastSpawnTimer;
+            lastSpawnTimer = System.currentTimeMillis();
+            if(spawnTimer < spawnCoolDown){
+                return;
+            }
+
+            enemyOnBoard++;
+            int enemyType = 1 + (int) (Math.random()*(2-1+1));
+            switch (enemyType){
+                case 1: entityManager.addEntity(new Slime(handler, Assets.skeleton,
+                        Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 15)); break;
+                case 2: entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
+                        Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 10)); break;
+                default: break;
+            }
+
+            spawnTimer = 0;
+        }
+
     }
 
     public void render(GraphicsContext g){
@@ -110,5 +125,13 @@ public class World {
 
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    public int getEnemyOnBoard() {
+        return enemyOnBoard;
+    }
+
+    public void setEnemyOnBoard(int enemyOnBoard) {
+        this.enemyOnBoard = enemyOnBoard;
     }
 }

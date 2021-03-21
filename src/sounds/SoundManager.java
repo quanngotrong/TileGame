@@ -1,7 +1,6 @@
 package sounds;
 
 import game.Handler;
-import javafx.scene.control.Slider;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.ArrayList;

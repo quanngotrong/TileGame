@@ -37,7 +37,7 @@ public class VictoryState extends State{
 
                 }));
 
-        uiManager.addObject(new UIImageButton(450, 430,200, 100, Assets.exit, () -> Platform.exit()));
+        uiManager.addObject(new UIImageButton(450, 430,200, 100, Assets.exit, Platform::exit));
     }
 
     @Override

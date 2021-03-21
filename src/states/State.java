@@ -1,7 +1,7 @@
 package states;
 
 import game.Handler;
-import gfx.Assets;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
 

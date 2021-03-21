@@ -4,7 +4,7 @@ import game.Handler;
 import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
+
 import settings.Settings;
 
 import ui.UIImageButton;
