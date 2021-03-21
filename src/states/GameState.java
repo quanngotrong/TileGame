@@ -10,11 +10,15 @@ import settings.Settings;
 import sounds.Sound;
 import worlds.World;
 
+import java.util.Set;
+
 
 public class GameState extends State{
 
 
     private World world;
+
+    //Scores
 
 
     public GameState(Handler handler){
@@ -55,6 +59,8 @@ public class GameState extends State{
             }
         }
 
+        Settings.SCORES = 0;
+
         //Sounds off
         handler.getSoundManager().soundOff();
 
@@ -69,7 +75,8 @@ public class GameState extends State{
         g.setFill(Color.LAVENDER);
         g.fillRect(Settings.STAGE_WIDTH - 200, 0, 200, 30);
         g.setFill(Color.BLACK);
-        g.fillText("Thời gian hoặc điểm số gì đó", Settings.STAGE_WIDTH - 190, 20);
+        g.fillText("Điểm số: " + Settings.SCORES + " || Đạn: "
+                + handler.getWorld().getEntityManager().getPlayer().getAmmo(), Settings.STAGE_WIDTH - 190, 20);
     }
 
 }

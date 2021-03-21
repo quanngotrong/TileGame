@@ -34,7 +34,7 @@ public class Game extends Application {
     //States
     public State gameState;
     public State menuState;
-    public State pauseState;
+
     //Input
     private KeyManager keyManager;
     private MouseManager mouseManager;
@@ -45,8 +45,6 @@ public class Game extends Application {
 
     //Sound
     private SoundManager soundManager;
-
-
 
     public void init(){
         Assets.init();

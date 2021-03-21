@@ -19,6 +19,7 @@ import sounds.Sound;
 import states.GameOverState;
 import states.State;
 
+
 public class Player extends Creature{
 
     int count = 9;
@@ -35,6 +36,7 @@ public class Player extends Creature{
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
     private MediaPlayer footstep;
+    protected int ammo = 10;
 
     public Player(Handler handler, Image image, double x, double y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
@@ -87,9 +89,16 @@ public class Player extends Creature{
         ar.setWidth(arSize);
         ar.setHeight(arSize);
 
-        if(handler.getKeyManager().isCtrl()){
+        if(handler.getKeyManager().isCtrl() && ammo > 0){
             handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_bullet,
-                    x + 20, y + 30, Settings.PLAYER_BULLET_DAMAGE, direction));
+                    x + 22, y + 35, Settings.PLAYER_BULLET_DAMAGE, direction));
+            ammo--;
+            if(!Settings.IS_MUTE){
+                if(Sound.player_fired.getStatus() == MediaPlayer.Status.PLAYING)
+                    Sound.player_fired.stop();
+                Sound.player_fired.play();
+            }
+
         } else if(handler.getKeyManager().isSpace() && direction == 1){
             ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
             ar.setY(cb.getY() - arSize);
@@ -177,6 +186,9 @@ public class Player extends Creature{
         //Set active
         active = false;
 
+        //Reset Scores
+        Settings.SCORES = 0;
+
         //Sound off
         handler.getSoundManager().soundOff();
 
@@ -203,5 +215,7 @@ public class Player extends Creature{
                 (int) (y - handler.getGameCamera().getyOffset()), 40 * ((double) (health) /(double) maxHealth), 4);
     }
 
-
+    public int getAmmo() {
+        return ammo;
+    }
 }

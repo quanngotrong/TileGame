@@ -12,4 +12,5 @@ public class Sound {
     public static MediaPlayer gameover = new MediaPlayer(SoundLoader.loadSound("res/sounds/gameover.mp3"));
     public static MediaPlayer victory = new MediaPlayer(SoundLoader.loadSound("res/sounds/victory.mp3"));
     public static MediaPlayer punch = new MediaPlayer(SoundLoader.loadSound("res/sounds/punch.mp3"));
+    public static MediaPlayer player_fired = new MediaPlayer(SoundLoader.loadSound("res/sounds/player_fired.wav"));
 }

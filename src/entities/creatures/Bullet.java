@@ -19,15 +19,65 @@ public class Bullet extends Creature{
 
         setSpeed(50);
 
+        bounds.setX(4);
+        bounds.setY(4);
+        bounds.setWidth(12);
+        bounds.setHeight(12);
+
     }
 
     @Override
     public void move() {
-        x += xMove/2;
-        xLong += xMove/2;
+        moveX();
+        moveY();
+    }
 
-        y += yMove/2;
-        yLong += yMove/2;
+    public void moveX(){
+        if(xMove > 0){ //Moving right
+            int tx = (int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH;
+
+            if(!collisionWithTile(tx, (int) (y + bounds.getY()) / Settings.TILE_HEIGHT) &&
+                    !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)){
+                x += xMove/2;
+                xLong += xMove/2;
+            } else {
+                die();
+            }
+        } else if (xMove < 0){ //Moving left
+            int tx = (int) (x + bounds.getX()) / Settings.TILE_WIDTH;
+
+            if (!collisionWithTile(tx, (int) (y + bounds.getY()) / Settings.TILE_HEIGHT) &&
+                    !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)) {
+                x += xMove/2;
+                xLong += xMove/2;
+            } else {
+                die();
+            }
+        }
+    }
+
+    public void moveY(){
+        if(yMove < 0){ //Moving up
+            int ty = (int) (y + bounds.getY()) / Settings.TILE_HEIGHT;
+
+            if(!collisionWithTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
+                    !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
+                y += yMove/2;
+                yLong += yMove/2;
+            } else {
+                die();
+            }
+        } else if (yMove > 0){ //Moving down
+            int ty = (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT;
+
+            if(!collisionWithTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
+                    !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
+                y += yMove/2;
+                yLong += yMove/2;
+            } else {
+                die();
+            }
+        }
     }
 
     @Override
@@ -85,6 +135,7 @@ public class Bullet extends Creature{
     public void render(GraphicsContext g) {
         g.drawImage(image, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
+
     }
 
     @Override
