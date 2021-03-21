@@ -16,7 +16,7 @@ IntelliJ thì như này: https://www.jetbrains.com/help/idea/javafx.html#add-jav
 Eclipse chắc cũng tương tự.
 
 
-Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P thì sẽ chuyển sang Pause State. Trong Game State có Player và Enemy, Player hiện chỉ có thể Attack bằng phím Space và bắn bằng Ctrl. Nếu Player đánh hết Enemy thì chuyển sang Victory State, nếu Player bị chết thì chuyển sang Game Over State.
+Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P thì sẽ chuyển sang Pause State. Trong Game State có Player và Enemy, Player hiện chỉ có thể Attack bằng phím Space và bắn bằng Q. Nếu Player đánh hết Enemy, hoặc giết đủ 100 đứa thì chuyển sang Victory State, nếu Player bị chết thì chuyển sang Game Over State.
 
 
 Demo là như vậy, ý tưởng phát triển thêm: 
