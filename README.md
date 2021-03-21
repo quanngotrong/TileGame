@@ -21,7 +21,7 @@ Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P t
 
 Demo là như vậy, ý tưởng phát triển thêm: 
 
-- [x] Thêm khả năng bắn đạn (cho Player và Enemy), với Player thì cần thêm Energy. Ý tưởng thiết kế đạn thì Class Bullets sẽ extends Class Creature, mỗi khi nhấn phím Ctrl sẽ tùy theo direction của Player mà set xMove, yMove,... Đạn có thể thêm vào ArrayList entitiesManager đã có, hoặc thêm vào ArrayList mới, tùy theo cái nào làm được thì làm. Đạn cũng sẽ có bounds để check Collision Bounds với Enemy, nếu Intersect thì remove đạn khỏi ArrayList và takeDamage cho Enemy.
+- [x] <del> Thêm khả năng bắn đạn (cho Player và Enemy), với Player thì cần thêm Energy. Ý tưởng thiết kế đạn thì Class Bullets sẽ extends Class Creature, mỗi khi nhấn phím Ctrl sẽ tùy theo direction của Player mà set xMove, yMove,... Đạn có thể thêm vào ArrayList entitiesManager đã có, hoặc thêm vào ArrayList mới, tùy theo cái nào làm được thì làm. Đạn cũng sẽ có bounds để check Collision Bounds với Enemy, nếu Intersect thì remove đạn khỏi ArrayList và takeDamage cho Enemy. </del>
 
 - [ ] Thêm điểm số, hoặc nếu phát triển theo hướng Survival thì cần thêm số quái giết được, bộ đếm thời gian, cứ tới mỗi mốc thì sẽ spawn ra Enemy. 
 
