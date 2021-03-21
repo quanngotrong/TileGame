@@ -21,15 +21,15 @@ Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P t
 
 Demo là như vậy, ý tưởng phát triển thêm: 
 
-[x] Thêm khả năng bắn đạn (cho Player và Enemy), với Player thì cần thêm Energy. Ý tưởng thiết kế đạn thì Class Bullets sẽ extends Class Creature, mỗi khi nhấn phím Ctrl sẽ tùy theo direction của Player mà set xMove, yMove,... Đạn có thể thêm vào ArrayList entitiesManager đã có, hoặc thêm vào ArrayList mới, tùy theo cái nào làm được thì làm. Đạn cũng sẽ có bounds để check Collision Bounds với Enemy, nếu Intersect thì remove đạn khỏi ArrayList và takeDamage cho Enemy.
+- [x] Thêm khả năng bắn đạn (cho Player và Enemy), với Player thì cần thêm Energy. Ý tưởng thiết kế đạn thì Class Bullets sẽ extends Class Creature, mỗi khi nhấn phím Ctrl sẽ tùy theo direction của Player mà set xMove, yMove,... Đạn có thể thêm vào ArrayList entitiesManager đã có, hoặc thêm vào ArrayList mới, tùy theo cái nào làm được thì làm. Đạn cũng sẽ có bounds để check Collision Bounds với Enemy, nếu Intersect thì remove đạn khỏi ArrayList và takeDamage cho Enemy.
 
-[] Thêm điểm số, hoặc nếu phát triển theo hướng Survival thì cần thêm số quái giết được, bộ đếm thời gian, cứ tới mỗi mốc thì sẽ spawn ra Enemy. 
+- [] Thêm điểm số, hoặc nếu phát triển theo hướng Survival thì cần thêm số quái giết được, bộ đếm thời gian, cứ tới mỗi mốc thì sẽ spawn ra Enemy. 
 
-[] Enemy thay vì đứng im, chờ Player đi vào zone rồi mới đuổi theo Player thì có thể đi Random hướng để đi lung tung.
+- [] Enemy thay vì đứng im, chờ Player đi vào zone rồi mới đuổi theo Player thì có thể đi Random hướng để đi lung tung.
 
-[] Thêm các State tương ứng với mức Easy, Medium, Hard, thêm các World mới. Về World có thể sử dụng Tiled (https://www.mapeditor.org/) để thiết kế cho đẹp.
+- [] Thêm các State tương ứng với mức Easy, Medium, Hard, thêm các World mới. Về World có thể sử dụng Tiled (https://www.mapeditor.org/) để thiết kế cho đẹp.
 
-[] Thêm Story Scene, NPC Dialogue, tạo cốt truyện cho Game, cái này chắc hơi thừa, rảnh thì làm quá.
+- [] Thêm Story Scene, NPC Dialogue, tạo cốt truyện cho Game, cái này chắc hơi thừa, rảnh thì làm quá.
 
 Starting Scene:
 ![image](https://user-images.githubusercontent.com/38860847/111766841-90e25e80-88d8-11eb-8212-2b308d6b484b.png)
