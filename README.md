@@ -16,12 +16,14 @@ IntelliJ thì như này: https://www.jetbrains.com/help/idea/javafx.html#add-jav
 Eclipse chắc cũng tương tự.
 
 
-Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P thì sẽ chuyển sang Pause State. Trong Game State có Player và Enemy, Player hiện chỉ có thể Attack bằng phím Space. Nếu Player đánh hết Enemy thì chuyển sang Victory State, nếu Player bị chết thì chuyển sang Game Over State.
+Cơ bản thì game sẽ có flow: Starting Scene -> Game State, nếu bấm P thì sẽ chuyển sang Pause State. Trong Game State có Player và Enemy, Player hiện chỉ có thể Attack bằng phím Space và bắn bằng Ctrl. Nếu Player đánh hết Enemy thì chuyển sang Victory State, nếu Player bị chết thì chuyển sang Game Over State.
 
 
 Demo là như vậy, ý tưởng phát triển thêm: 
 
 - [x] <del> Thêm khả năng bắn đạn (cho Player và Enemy), với Player thì cần thêm Energy. Ý tưởng thiết kế đạn thì Class Bullets sẽ extends Class Creature, mỗi khi nhấn phím Ctrl sẽ tùy theo direction của Player mà set xMove, yMove,... Đạn có thể thêm vào ArrayList entitiesManager đã có, hoặc thêm vào ArrayList mới, tùy theo cái nào làm được thì làm. Đạn cũng sẽ có bounds để check Collision Bounds với Enemy, nếu Intersect thì remove đạn khỏi ArrayList và takeDamage cho Enemy. </del>
+ 
+Sửa nốt cái bắn xuyên tường là ok.
 
 - [ ] Thêm điểm số, hoặc nếu phát triển theo hướng Survival thì cần thêm số quái giết được, bộ đếm thời gian, cứ tới mỗi mốc thì sẽ spawn ra Enemy. 
 
