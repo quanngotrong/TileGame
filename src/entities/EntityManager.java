@@ -1,5 +1,6 @@
 package entities;
 
+import entities.creatures.Bullet;
 import entities.creatures.Player;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,12 +14,15 @@ public class EntityManager{
     private Handler handler;
     private Player player;
     private ArrayList<Entity> entities;
-    private Iterator i;
+    private ArrayList<Bullet> bullets;
+    private Iterator i, j;
     private Comparator<Entity> renderSort = (a,b) -> Double.compare(a.getY() + a.getHeight() , b.getY() + b.getHeight());
+
     public EntityManager(Handler handler, Player player){
         this.handler = handler;
         this.player = player;
         entities = new ArrayList<>();
+        bullets = new ArrayList<>();
         addEntity(player);
     }
 
@@ -31,19 +35,35 @@ public class EntityManager{
             if(!e.isActive())
                 i.remove();
         }
-
         entities.sort(renderSort);
+
+        j = bullets.iterator();
+        while(j.hasNext()){
+            Bullet bullet = (Bullet) j.next();
+            bullet.tick();
+
+            if(!bullet.isActive())
+                j.remove();
+        }
     }
 
     public void render(GraphicsContext g){
         for(Entity e: entities){
             e.render(g);
         }
+
+        for(Bullet b : bullets){
+            b.render(g);
+        }
     }
 
     public void addEntity(Entity e){
         entities.add(e);
     }
+    public void addBullet(Bullet b) {
+        bullets.add(b);
+    }
+
 
     //Getters & Setters
     public Player getPlayer() {
@@ -52,6 +72,10 @@ public class EntityManager{
 
     public ArrayList<Entity> getEntities() {
         return entities;
+    }
+
+    public ArrayList<Bullet> getBullets(){
+        return bullets;
     }
 
 }

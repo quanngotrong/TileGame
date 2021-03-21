@@ -3,6 +3,7 @@ package entities.creatures;
 import entities.Entity;
 import game.Handler;
 
+import gfx.Assets;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -27,8 +28,8 @@ public class Player extends Creature{
     int width = 64;
     int height = 64;
 
-    SpriteAnimation animation;
-    Image player;
+    private SpriteAnimation animation;
+    private Image player;
 
 
     //Attack Timer
@@ -40,7 +41,6 @@ public class Player extends Creature{
 
         setSpeed(5);
 
-        arSize = 30;
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -82,10 +82,15 @@ public class Player extends Creature{
 
         Rectangle cb = getCollisionBounds(0, 0);
         Rectangle ar = new Rectangle();
+
+        int arSize = 30;
         ar.setWidth(arSize);
         ar.setHeight(arSize);
 
-        if(handler.getKeyManager().isSpace() && direction == 1){
+        if(handler.getKeyManager().isCtrl()){
+            handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_bullet,
+                    x + 20, y + 30, Settings.PLAYER_BULLET_DAMAGE, direction));
+        } else if(handler.getKeyManager().isSpace() && direction == 1){
             ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
             ar.setY(cb.getY() - arSize);
         } else if(handler.getKeyManager().isSpace() && direction == 2){
@@ -113,6 +118,11 @@ public class Player extends Creature{
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
                 e.takeDamage(damage);
+                if(!Settings.IS_MUTE){
+                    if(Sound.punch.getStatus() == MediaPlayer.Status.PLAYING)
+                        Sound.punch.stop();
+                    Sound.punch.play();
+                }
             }
         }
     }
@@ -144,6 +154,8 @@ public class Player extends Creature{
             xMove = speed;
             animation.setOffsetY(192);
         }
+
+
     }
 
     public void stepSound(){
@@ -190,5 +202,6 @@ public class Player extends Creature{
         g.fillRect((int)(x - handler.getGameCamera().getxOffset()) + 11,
                 (int) (y - handler.getGameCamera().getyOffset()), 40 * ((double) (health) /(double) maxHealth), 4);
     }
+
 
 }

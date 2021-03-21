@@ -24,7 +24,7 @@ public class VictoryState extends State{
 
         stateSound = Sound.victory;
         handler.getSoundManager().addSound(stateSound);
-        if(!handler.getGame().isMute)
+        if(!Settings.IS_MUTE)
             stateSound.play();
 
 

@@ -4,7 +4,6 @@ module TileGame {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
-    requires javafx.swing;
 
     opens game;
 }

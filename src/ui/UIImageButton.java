@@ -15,10 +15,6 @@ public class UIImageButton extends UIObject{
         this.clicker = clicker;
     }
 
-    public void changeImage(Image image){
-        this.image = image;
-    }
-
     @Override
     public void tick() {
     }

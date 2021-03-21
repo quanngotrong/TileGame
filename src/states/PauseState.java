@@ -4,7 +4,7 @@ import game.Handler;
 import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.Pane;
 import settings.Settings;
 
 import ui.UIImageButton;
@@ -37,15 +37,14 @@ public class PauseState extends State{
 
         uiManager.addObject(new UIImageButton(320, 400,180, 120, Assets.mute_unmute,
                 () -> {
-                    if(!handler.getGame().isMute) {
+                    if(!Settings.IS_MUTE) {
                         handler.getSoundManager().muteAll();
-                        handler.getGame().isMute = true;
+                        Settings.IS_MUTE = true;
                     } else {
                         handler.getSoundManager().unMuteAll();
-                        handler.getGame().isMute = false;
+                        Settings.IS_MUTE = false;
                     }
                 }));
-
     }
 
     @Override

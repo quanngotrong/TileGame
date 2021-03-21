@@ -20,7 +20,7 @@ public class GameOverState extends State{
 
         stateSound = Sound.gameover;
         handler.getSoundManager().addSound(stateSound);
-        if(!handler.getGame().isMute)
+        if(!Settings.IS_MUTE)
             stateSound.play();
 
         uiManager.addObject(new UIImageButton(250, 370,200, 100, Assets.restart,

@@ -45,7 +45,7 @@ public class Game extends Application {
 
     //Sound
     private SoundManager soundManager;
-    public boolean isMute = false;
+
 
 
     public void init(){

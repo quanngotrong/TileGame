@@ -11,4 +11,5 @@ public class Sound {
     public static MediaPlayer uchiha = new MediaPlayer(SoundLoader.loadSound("res/sounds/uchiha_theme.mp3"));
     public static MediaPlayer gameover = new MediaPlayer(SoundLoader.loadSound("res/sounds/gameover.mp3"));
     public static MediaPlayer victory = new MediaPlayer(SoundLoader.loadSound("res/sounds/victory.mp3"));
+    public static MediaPlayer punch = new MediaPlayer(SoundLoader.loadSound("res/sounds/punch.mp3"));
 }

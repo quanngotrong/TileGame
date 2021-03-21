@@ -1,6 +1,7 @@
 package sounds;
 
 import game.Handler;
+import javafx.scene.control.Slider;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.ArrayList;
@@ -41,6 +42,12 @@ public class SoundManager {
         for (MediaPlayer mediaP : sounds)
             mediaP.setMute(false);
     }
+
+    public void setVolume(int volume){
+        for(MediaPlayer mediaP : sounds)
+            mediaP.setVolume(volume);
+    }
+
 
     public ArrayList<MediaPlayer> getSoundList(){
         return sounds;

@@ -11,6 +11,8 @@ public class Assets {
     public static Image start, exit, mute_unmute, restart, main_menu;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
 
+    public static Image player_bullet;
+
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
         tree1 = ImageLoader.loadImage("res/textures/tree.png");
@@ -21,6 +23,8 @@ public class Assets {
 
         skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
         player = ImageLoader.loadImage("res/textures/minotaur.png");
+
+        player_bullet = ImageLoader.loadImage("res/textures/player_bullet.png");
 
 
         start = ImageLoader.loadImage("res/textures/start_button.png");

@@ -21,7 +21,7 @@ public abstract class Enemy extends Creature{
 
     public Enemy(Handler handler,  Image image, double x, double y, int damage){
         super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
-        arSize = 20;
+
 
     }
 
@@ -46,7 +46,7 @@ public abstract class Enemy extends Creature{
 
         if(checkAttackZone()){
             handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-            if(!handler.getGame().isMute){
+            if(!Settings.IS_MUTE){
                 if(Sound.hurt.getStatus() == MediaPlayer.Status.PLAYING)
                     Sound.hurt.stop();
                 Sound.hurt.play();
@@ -60,7 +60,8 @@ public abstract class Enemy extends Creature{
         playerX = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getX();
         playerY = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getY();
         distance = (enemyX - playerX)*(enemyX - playerX) + (enemyY - playerY)*(enemyY - playerY);
-        return distance < 200*200;
+
+        return distance < Settings.DISTANCE_PLAYER;
     }
 
     protected boolean checkAttackZone() {
@@ -69,7 +70,8 @@ public abstract class Enemy extends Creature{
         playerX = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getX();
         playerY = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getY();
         distance = (enemyX - playerX)*(enemyX - playerX) + (enemyY - playerY)*(enemyY - playerY);
-        return distance < 35*35;
+
+        return distance < Settings.ATTACK_ZONE;
     }
 
 

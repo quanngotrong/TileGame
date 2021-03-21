@@ -13,15 +13,14 @@ import settings.Settings;
 import tiles.Tile;
 import utils.Utils;
 
-import java.util.Random;
+
 
 public class World {
 
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
-    private Enemy skeleton;
-    private Enemy slime;
+
 
     //Entities
     private EntityManager entityManager;

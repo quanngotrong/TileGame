@@ -43,5 +43,8 @@ public class KeyManager {
     public boolean isPause(){
         return keys.getOrDefault(KeyCode.P, false);
     }
+    public boolean isCtrl(){
+        return keys.getOrDefault(KeyCode.CONTROL, false);
+    }
 
 }
